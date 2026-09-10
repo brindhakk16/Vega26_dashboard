@@ -14,7 +14,7 @@ class ThermalService {
     this.reconnectTimer = null;
     this.sensorStatus = {
       connected: false,
-      sensorId: 'AMG8833-001',
+      sensorId: 'SYS-NODE-01',
       refreshRate: 10,
       scenario: 'normal_cradle',
       isRunning: true,

@@ -8,7 +8,7 @@ export function useThermalStream() {
   const [environmentStatus, setEnvironmentStatus] = useState(null);
   const [status, setStatus] = useState({
     connected: false,
-    sensorId: 'AMG8833-001',
+    sensorId: 'SYS-NODE-01',
     refreshRate: 3,
     scenario: CRADLE_SCENARIOS.NORMAL_CRADLE,
     isRunning: true

@@ -34,7 +34,7 @@ export function CalibrationOverlay({
         {/* FOV Header Label */}
         <div className="absolute -top-6 left-0 bg-thermal-cyan text-black px-2 py-0.5 rounded font-bold flex items-center gap-1 shadow">
           <Target className="w-3 h-3" />
-          <span>AMG8833 SENSOR FOV BOUNDS</span>
+          <span>THERMAL SENSOR FOV BOUNDS</span>
         </div>
 
         {/* X / Y Direction Axes */}

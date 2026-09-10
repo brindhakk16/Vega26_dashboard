@@ -1,148 +1,158 @@
-import React, { useState, useEffect } from 'react';
-import { useThermalStream } from './hooks/useThermalStream.js';
-import { useThermalHistory } from './hooks/useThermalHistory.js';
-import { TopBar } from './components/layout/TopBar.jsx';
-import { Sidebar } from './components/layout/Sidebar.jsx';
-import { DashboardPage } from './pages/Dashboard.jsx';
-import { LiveThermalPage } from './pages/LiveThermal.jsx';
-import { AnalyticsPage } from './pages/Analytics.jsx';
-import { HistoryPage } from './pages/History.jsx';
-import { SensorPage } from './pages/Sensor.jsx';
+import React, { useState } from 'react';
+import { useSensorStream } from './hooks/useSensorStream.js';
+import { HeaderNav } from './components/layout/HeaderNav.jsx';
+import { SidebarNav } from './components/layout/SidebarNav.jsx';
+
+import { DashboardOverviewPage } from './pages/DashboardOverview.jsx';
+import { ThermalMonitoringPage } from './pages/ThermalMonitoring.jsx';
+import { HumanMonitoringPage } from './pages/HumanMonitoring.jsx';
+import { GasMonitoringPage } from './pages/GasMonitoring.jsx';
+import { AirQualityOverviewPage } from './pages/AirQualityOverview.jsx';
+import { LiveTrendsPage } from './pages/LiveTrends.jsx';
+import { AlertsEventsPage } from './pages/AlertsEvents.jsx';
+import { SensorHealthPage } from './pages/SensorHealth.jsx';
+import { SensorCalibrationPage } from './pages/SensorCalibration.jsx';
+import { HistoricalTimelogPage } from './pages/HistoricalTimelog.jsx';
 import { SettingsPage } from './pages/Settings.jsx';
-import { PALETTES } from './utils/thermalColor.js';
-import { CRADLE_SCENARIOS } from '../../shared/thermal.js';
+import { LoginPage } from './pages/LoginPage.jsx';
 
 export function App() {
-  const { frame, processedFrame, status, environmentStatus, connected, reconnecting, setScenario, setFps, start, stop } = useThermalStream();
-  const { history, clearHistory } = useThermalHistory(100);
+  const {
+    data,
+    isPaused,
+    togglePause,
+    demoMode,
+    setDemoMode,
+    scenario,
+    setScenario,
+    acknowledgeAlert,
+    clearAlert,
+    clearAllAlerts,
+    getHistory,
+    thresholds,
+    updateThresholds
+  } = useSensorStream();
 
-  // Application State with localStorage persistence
+  const [currentUser, setCurrentUser] = useState(null);
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [scenario, setScenarioState] = useState(CRADLE_SCENARIOS.NORMAL_CRADLE);
-  const [fps, setFpsState] = useState(3);
-  const [palette, setPalette] = useState(() => localStorage.getItem('thermal_palette') || PALETTES.IRONBOW);
-  const [mode, setMode] = useState(() => localStorage.getItem('thermal_mode') || 'smooth');
-  const [showGrid, setShowGrid] = useState(() => localStorage.getItem('thermal_grid') !== 'false');
-  const [showCradleOutline, setShowCradleOutline] = useState(() => localStorage.getItem('thermal_cradle_outline') !== 'false');
-  const [autoRange, setAutoRange] = useState(() => localStorage.getItem('thermal_autorange') !== 'false');
-  const [unit, setUnit] = useState(() => localStorage.getItem('thermal_unit') || 'C');
-  const [warningThreshold, setWarningThreshold] = useState(() => Number(localStorage.getItem('thermal_warn_thresh')) || 30);
-  const [criticalThreshold, setCriticalThreshold] = useState(() => Number(localStorage.getItem('thermal_crit_thresh')) || 32);
+  const [warningThreshold, setWarningThreshold] = useState(30);
+  const [criticalThreshold, setCriticalThreshold] = useState(35);
+  const [palette, setPalette] = useState('ironbow');
+  const [mode, setMode] = useState('smooth');
+  const [unit, setUnit] = useState('C');
 
-  // Sync state changes with localStorage
-  useEffect(() => { localStorage.setItem('thermal_palette', palette); }, [palette]);
-  useEffect(() => { localStorage.setItem('thermal_mode', mode); }, [mode]);
-  useEffect(() => { localStorage.setItem('thermal_grid', showGrid.toString()); }, [showGrid]);
-  useEffect(() => { localStorage.setItem('thermal_cradle_outline', showCradleOutline.toString()); }, [showCradleOutline]);
-  useEffect(() => { localStorage.setItem('thermal_autorange', autoRange.toString()); }, [autoRange]);
-  useEffect(() => { localStorage.setItem('thermal_unit', unit); }, [unit]);
-  useEffect(() => { localStorage.setItem('thermal_warn_thresh', warningThreshold.toString()); }, [warningThreshold]);
-  useEffect(() => { localStorage.setItem('thermal_crit_thresh', criticalThreshold.toString()); }, [criticalThreshold]);
+  const history = getHistory(500);
+  const activeAlerts = (data.alerts || []).filter(a => a.status === 'ACTIVE');
 
-  const handleScenarioChange = (newScenario) => {
-    setScenarioState(newScenario);
-    setScenario(newScenario);
-  };
-
-  const handleFpsChange = (newFps) => {
-    setFpsState(newFps);
-    setFps(newFps);
-  };
-
-  const handleToggleUnit = () => {
-    setUnit((prev) => (prev === 'C' ? 'F' : 'C'));
-  };
-
-  const handleResetDefaults = () => {
-    setPalette(PALETTES.IRONBOW);
-    setMode('smooth');
-    setShowGrid(true);
-    setShowCradleOutline(true);
-    setAutoRange(true);
-    setUnit('C');
-    setWarningThreshold(30);
-    setCriticalThreshold(32);
-  };
+  // If user is not authenticated, render Login/Sign In Screen (Doctor & Patient Login)
+  if (!currentUser) {
+    return <LoginPage onLogin={setCurrentUser} />;
+  }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#090B10] text-[#F4F7FA] selection:bg-emerald-500 selection:text-white">
-      {/* Header Bar */}
-      <TopBar
-        connected={connected}
-        reconnecting={reconnecting}
-        sensorId={status.sensorId || 'AMG8833-001'}
-        fps={status.refreshRate || fps}
-        onOpenSettings={() => setActiveTab('settings')}
+    <div className="min-h-screen flex flex-col bg-[#EAECEF] text-slate-900 selection:bg-emerald-500 selection:text-white font-jakarta">
+      
+      {/* Header Toolbar */}
+      <HeaderNav
+        data={data}
+        isPaused={isPaused}
+        onTogglePause={togglePause}
+        demoMode={demoMode}
+        onToggleDemoMode={setDemoMode}
+        scenario={scenario}
+        onSelectScenario={setScenario}
+        activeAlertCount={activeAlerts.length}
+        onOpenAlerts={() => setActiveTab('alerts')}
+        user={currentUser}
+        onLogout={() => setCurrentUser(null)}
       />
 
-      {/* Main Layout Body */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Navigation Sidebar (For non-dashboard routes) */}
-        {activeTab !== 'dashboard' && (
-          <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
-        )}
+      {/* Main Body Layout with Responsive Navigation Sidebar */}
+      <div className="flex-1 flex overflow-hidden p-3 sm:p-5 gap-4">
+        
+        {/* Navigation Sidebar */}
+        <SidebarNav
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          activeAlertCount={activeAlerts.length}
+        />
 
-        {/* Dynamic Content Workspace Area */}
-        <main className={`flex-1 overflow-y-auto ${activeTab === 'dashboard' ? 'p-0 bg-[#090B10]' : 'p-4 md:p-6 bg-[#090B10]'}`}>
+        {/* Dynamic Workspace Container */}
+        <main className="flex-1 overflow-y-auto bg-[#F8FAFC] border border-slate-200/80 rounded-[32px] shadow-xl p-4 md:p-8">
+          
           {activeTab === 'dashboard' && (
-            <DashboardPage
-              frame={frame}
-              status={status}
-              environmentStatus={environmentStatus}
+            <DashboardOverviewPage
+              data={data}
+              thresholds={thresholds}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {activeTab === 'thermal' && (
+            <ThermalMonitoringPage
+              data={data}
               history={history}
-              scenario={scenario}
-              onScenarioChange={handleScenarioChange}
-              fps={fps}
-              onFpsChange={handleFpsChange}
-              palette={palette}
-              onPaletteChange={setPalette}
-              mode={mode}
-              onModeChange={setMode}
-              showGrid={showGrid}
-              onToggleGrid={() => setShowGrid(!showGrid)}
-              showCradleOutline={showCradleOutline}
-              onToggleCradleOutline={() => setShowCradleOutline(!showCradleOutline)}
-              autoRange={autoRange}
-              onToggleAutoRange={() => setAutoRange(!autoRange)}
-              unit={unit}
-              onToggleUnit={handleToggleUnit}
-              warningThreshold={warningThreshold}
-              criticalThreshold={criticalThreshold}
-              onStart={start}
-              onStop={stop}
-              onReset={clearHistory}
-              onNavigateTab={setActiveTab}
+              thresholds={thresholds}
             />
           )}
 
-          {activeTab === 'live' && (
-            <LiveThermalPage
-              frame={frame}
-              processedFrame={processedFrame}
-              status={status}
-              palette={palette}
-              unit={unit}
-            />
-          )}
-
-          {activeTab === 'analytics' && (
-            <AnalyticsPage
+          {activeTab === 'human' && (
+            <HumanMonitoringPage
+              data={data}
               history={history}
-              frame={frame}
-              unit={unit}
+              thresholds={thresholds}
             />
           )}
 
-          {activeTab === 'history' && (
-            <HistoryPage
+          {activeTab === 'gas' && (
+            <GasMonitoringPage
+              data={data}
+              thresholds={thresholds}
+            />
+          )}
+
+          {activeTab === 'airquality' && (
+            <AirQualityOverviewPage
+              data={data}
+              thresholds={thresholds}
+            />
+          )}
+
+          {activeTab === 'trends' && (
+            <LiveTrendsPage
               history={history}
-              palette={palette}
-              unit={unit}
+              isPaused={isPaused}
+              onTogglePause={togglePause}
             />
           )}
 
-          {activeTab === 'sensor' && (
-            <SensorPage status={status} />
+          {activeTab === 'alerts' && (
+            <AlertsEventsPage
+              alerts={data.alerts || []}
+              onAcknowledge={acknowledgeAlert}
+              onClear={clearAlert}
+              onClearAll={clearAllAlerts}
+            />
+          )}
+
+          {activeTab === 'health' && (
+            <SensorHealthPage
+              data={data}
+            />
+          )}
+
+          {activeTab === 'calibration' && (
+            <SensorCalibrationPage
+              thresholds={thresholds}
+              onUpdateThresholds={updateThresholds}
+            />
+          )}
+
+          {activeTab === 'historical' && (
+            <HistoricalTimelogPage
+              history={history}
+              alerts={data.alerts || []}
+            />
           )}
 
           {activeTab === 'settings' && (
@@ -156,12 +166,21 @@ export function App() {
               mode={mode}
               onModeChange={setMode}
               unit={unit}
-              onToggleUnit={handleToggleUnit}
-              onResetDefaults={handleResetDefaults}
+              onToggleUnit={() => setUnit(unit === 'C' ? 'F' : 'C')}
+              onResetDefaults={() => {
+                setWarningThreshold(30);
+                setCriticalThreshold(35);
+                setPalette('ironbow');
+                setMode('smooth');
+                setUnit('C');
+              }}
+              onNavigateTab={setActiveTab}
             />
           )}
+
         </main>
       </div>
+
     </div>
   );
 }

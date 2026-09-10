@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { mockSensorService } from '../services/mockSensor.service.js';
+import { vegaWifiService } from '../services/vegaWifiService.js';
 
 const router = Router();
 
@@ -35,19 +36,42 @@ router.put('/environment/config', (req, res) => {
   res.json({ success: true, config: updated });
 });
 
-// POST /api/sensor/simulation/start
+// ====================================================
+// VEGA ARIES v2.0 WiFi REST Endpoints
+// ====================================================
+
+// POST /api/sensor/vega-wifi — Ingest JSON Telemetry from VEGA ARIES v2.0 WiFi board
+router.post('/vega-wifi', (req, res) => {
+  try {
+    const clientIp = req.ip || req.socket.remoteAddress || '192.168.1.120';
+    const merged = vegaWifiService.ingestTelemetry(req.body, clientIp);
+    res.json({ success: true, message: 'Telemetry received over WiFi', status: vegaWifiService.getStatus(), telemetry: merged });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// GET /api/sensor/vega-wifi/status — Query active WiFi connection status
+router.get('/vega-wifi/status', (req, res) => {
+  res.json(vegaWifiService.getStatus());
+});
+
+// GET /api/sensor/vega-wifi/latest — Query latest ingested WiFi telemetry
+router.get('/vega-wifi/latest', (req, res) => {
+  res.json(vegaWifiService.getLatestTelemetry());
+});
+
+// Simulation Control Endpoints
 router.post('/simulation/start', (req, res) => {
   mockSensorService.start();
   res.json({ success: true, message: 'Simulation streaming started', status: mockSensorService.getStatus() });
 });
 
-// POST /api/sensor/simulation/stop
 router.post('/simulation/stop', (req, res) => {
   mockSensorService.stop();
   res.json({ success: true, message: 'Simulation streaming paused', status: mockSensorService.getStatus() });
 });
 
-// POST /api/sensor/simulation/scenario
 router.post('/simulation/scenario', (req, res) => {
   const { scenario } = req.body;
   if (!scenario) {
@@ -61,7 +85,6 @@ router.post('/simulation/scenario', (req, res) => {
   }
 });
 
-// POST /api/sensor/simulation/fps
 router.post('/simulation/fps', (req, res) => {
   const { fps } = req.body;
   if (fps === undefined) {

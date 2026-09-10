@@ -1,39 +1,48 @@
 import React from 'react';
-import { HeartPulse, ShieldCheck, Settings } from 'lucide-react';
+import { Sun, Bell, User, Settings, Radio } from 'lucide-react';
 
-export function DashboardNav({ activeTab = 'overview', onTabChange, connected = true, sensorId = 'AMG8833-001', onOpenSettings }) {
+export function DashboardNav({
+  activeTab = 'dashboard',
+  onTabChange,
+  connected = true,
+  sensorId = 'SYS-NODE-01',
+  onOpenSettings
+}) {
   const navItems = [
     { id: 'dashboard', label: 'Overview' },
-    { id: 'live', label: 'Live Thermal' },
-    { id: 'analytics', label: 'Analytics' },
-    { id: 'history', label: 'History' }
+    { id: 'heartbeat', label: 'Heartbeat' },
+    { id: 'airquality', label: 'Air Quality' },
+    { id: 'babycamera', label: 'Baby Camera' }
   ];
 
   return (
-    <nav className="w-full bg-white border-b border-slate-200 px-6 py-3.5 flex items-center justify-between shadow-sm select-none rounded-t-2xl">
-      {/* Brand & Horizontal Nav Links */}
+    <nav className="w-full bg-[#0d1520] border-b border-white/15 px-6 py-4 flex items-center justify-between shadow-lg select-none text-white rounded-t-3xl">
+      {/* Brand Logo & Title */}
       <div className="flex items-center gap-8">
-        <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => onTabChange('dashboard')}>
-          <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shadow-xs">
-            <HeartPulse className="w-4 h-4 text-emerald-600" />
+        <div
+          className="flex items-center gap-2.5 cursor-pointer group"
+          onClick={() => onTabChange('dashboard')}
+        >
+          <div className="w-8 h-8 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shadow-md group-hover:border-[#D4FF00] transition-colors">
+            <Sun className="w-4 h-4 text-[#D4FF00] animate-spin-slow" />
           </div>
-          <span className="font-mono text-sm font-bold tracking-wider text-slate-900">
-            CRADLESENSE
+          <span className="font-outfit text-lg font-bold tracking-tight text-white group-hover:text-[#D4FF00] transition-colors">
+            VEGA <span className="text-xs font-mono font-normal opacity-60 text-white">/ Workstation</span>
           </span>
         </div>
 
-        {/* Horizontal Navigation Items */}
-        <div className="hidden md:flex items-center gap-1 font-mono text-xs">
+        {/* Navigation Tabs */}
+        <div className="hidden md:flex items-center gap-1 font-outfit text-xs font-semibold">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => onTabChange(item.id)}
-                className={`px-3.5 py-1.5 rounded-lg font-medium transition-all ${
+                className={`px-4 py-1.5 rounded-full transition-all ${
                   isActive
-                    ? 'bg-emerald-500/10 text-emerald-700 font-bold border border-emerald-500/30 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    ? 'bg-white text-slate-900 font-bold shadow-md'
+                    : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {item.label}
@@ -43,28 +52,42 @@ export function DashboardNav({ activeTab = 'overview', onTabChange, connected = 
         </div>
       </div>
 
-      {/* Connection Status & Action Icons */}
+      {/* Header Right Action Icons */}
       <div className="flex items-center gap-3 font-mono text-xs">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold text-[11px]">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>● ONLINE</span>
+        {/* Sensor Status Indicator */}
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[11px]">
+          <Radio className={`w-3 h-3 ${connected ? 'text-[#D4FF00] animate-pulse' : 'text-rose-400'}`} />
+          <span>{connected ? sensorId : 'DISCONNECTED'}</span>
         </div>
 
-        <div className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-          <span>{sensorId}</span>
-        </div>
+        {/* Notification Bell Icon */}
+        <button
+          title="Notifications"
+          className="relative p-2 rounded-full bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-all"
+        >
+          <Bell className="w-4 h-4" />
+          <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#D4FF00]" />
+        </button>
 
-        <div className="flex items-center gap-1 border-l border-slate-200 pl-2 text-slate-500">
-          <button
-            onClick={() => onTabChange('settings')}
-            title="Settings"
-            className="p-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-all"
-          >
-            <Settings className="w-3.5 h-3.5" />
-          </button>
-        </div>
+        {/* Profile Avatar Icon */}
+        <button
+          title="User Profile"
+          className="p-2 rounded-full bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-all"
+        >
+          <User className="w-4 h-4" />
+        </button>
+
+        {/* Settings Icon */}
+        <button
+          onClick={() => onTabChange('settings')}
+          title="Settings"
+          className="p-2 rounded-full bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-all"
+        >
+          <Settings className="w-4 h-4" />
+        </button>
       </div>
     </nav>
   );
 }
+
+export default DashboardNav;

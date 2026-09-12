@@ -15,6 +15,7 @@ import { SensorCalibrationPage } from './pages/SensorCalibration.jsx';
 import { HistoricalTimelogPage } from './pages/HistoricalTimelog.jsx';
 import { SettingsPage } from './pages/Settings.jsx';
 import { LoginPage } from './pages/LoginPage.jsx';
+import { AIChatbot } from './components/chat/AIChatbot.jsx';
 
 export function App() {
   const {
@@ -180,6 +181,14 @@ export function App() {
 
         </main>
       </div>
+
+      {/* AI Chatbot Assistant - Bottom Right Corner */}
+      <AIChatbot
+        data={data}
+        thresholds={thresholds}
+        currentUser={currentUser}
+        onNavigate={setActiveTab}
+      />
 
     </div>
   );

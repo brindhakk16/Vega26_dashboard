@@ -240,7 +240,7 @@ export function AIChatbot({ data, thresholds, currentUser, onNavigate }) {
   const snap = getTelemetrySnapshot();
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 select-none">
+    <div className="fixed bottom-6 right-6 z-[99999] select-none">
       
       {/* Floating Chat Launcher Button */}
       {!isOpen && (
@@ -248,16 +248,23 @@ export function AIChatbot({ data, thresholds, currentUser, onNavigate }) {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-          className="relative group"
+          className="relative group cursor-pointer"
         >
+          {/* Animated Callout Badge */}
+          <div className="absolute -top-11 right-0 whitespace-nowrap bg-gradient-to-r from-violet-900 to-indigo-900 text-violet-100 text-[11px] font-mono px-3.5 py-1 rounded-full border border-violet-400/50 shadow-[0_4px_15px_rgba(139,92,246,0.4)] pointer-events-none animate-bounce flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin" style={{ animationDuration: '4s' }} />
+            <span className="font-bold">AI Chatbot</span>
+            <span className="text-[9px] px-1.5 py-0.2 bg-emerald-500/20 text-emerald-300 rounded border border-emerald-400/30">ONLINE</span>
+          </div>
+
           {/* Pulsing Ambient Glow Ring */}
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-violet-600 via-purple-500 to-indigo-600 opacity-70 blur-md group-hover:opacity-100 transition duration-500 animate-pulse" />
+          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-violet-600 via-purple-500 to-indigo-600 opacity-80 blur-md group-hover:opacity-100 transition duration-500 animate-pulse" />
 
           {/* Floating Trigger Button */}
           <button
             onClick={() => setIsOpen(true)}
             id="vega-ai-chatbot-button"
-            className="relative flex items-center gap-3 px-5 py-3.5 rounded-full bg-gradient-to-r from-violet-700 via-purple-700 to-indigo-800 text-white font-outfit font-extrabold text-sm tracking-wide shadow-[0_4px_25px_rgba(139,92,246,0.6)] border border-violet-400/40 hover:scale-105 active:scale-95 transition-all"
+            className="relative flex items-center gap-3 px-5 py-3.5 rounded-full bg-gradient-to-r from-violet-700 via-purple-700 to-indigo-800 text-white font-outfit font-extrabold text-sm tracking-wide shadow-[0_4px_25px_rgba(139,92,246,0.7)] border border-violet-400/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <div className="relative">
               <Bot className="w-6 h-6 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
@@ -272,7 +279,7 @@ export function AIChatbot({ data, thresholds, currentUser, onNavigate }) {
                 <span>VEGA AI Copilot</span>
                 <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               </span>
-              <span className="text-[10px] font-mono text-violet-200/80 font-normal">
+              <span className="text-[10px] font-mono text-violet-200/90 font-normal">
                 {snap.activeAlertsCount > 0 ? `⚠️ ${snap.activeAlertsCount} Alerts Active` : '● Telemetry Live'}
               </span>
             </div>

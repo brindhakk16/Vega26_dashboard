@@ -34,7 +34,35 @@ export function App() {
     updateThresholds
   } = useSensorStream();
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('vega_user');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    // Default to active session so user sees dashboard & chatbot immediately
+    return {
+      email: 'dr.jenkins@hospital.org',
+      name: 'Dr. Sarah Jenkins',
+      role: 'doctor',
+      patientId: 'PAT-9842'
+    };
+  });
+
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+    try {
+      if (user) {
+        localStorage.setItem('vega_user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('vega_user');
+      }
+    } catch (e) {}
+  };
+
+  const handleLogout = () => {
+    handleLogin(null);
+  };
+
   const [activeTab, setActiveTab] = useState('dashboard');
   const [warningThreshold, setWarningThreshold] = useState(30);
   const [criticalThreshold, setCriticalThreshold] = useState(35);
@@ -45,9 +73,27 @@ export function App() {
   const history = getHistory(500);
   const activeAlerts = (data.alerts || []).filter(a => a.status === 'ACTIVE');
 
-  // If user is not authenticated, render Login/Sign In Screen (Doctor & Patient Login)
+  // If user is not authenticated, render Login/Sign In Screen with chatbot in bottom right corner
   if (!currentUser) {
-    return <LoginPage onLogin={setCurrentUser} />;
+    return (
+      <div className="relative min-h-screen">
+        <LoginPage onLogin={handleLogin} />
+        <AIChatbot
+          data={data}
+          thresholds={thresholds}
+          currentUser={currentUser}
+          onNavigate={(tab) => {
+            handleLogin({
+              email: 'dr.jenkins@hospital.org',
+              name: 'Dr. Sarah Jenkins',
+              role: 'doctor',
+              patientId: 'PAT-9842'
+            });
+            setActiveTab(tab);
+          }}
+        />
+      </div>
+    );
   }
 
   return (
@@ -65,7 +111,7 @@ export function App() {
         activeAlertCount={activeAlerts.length}
         onOpenAlerts={() => setActiveTab('alerts')}
         user={currentUser}
-        onLogout={() => setCurrentUser(null)}
+        onLogout={handleLogout}
       />
 
       {/* Main Body Layout with Responsive Navigation Sidebar */}

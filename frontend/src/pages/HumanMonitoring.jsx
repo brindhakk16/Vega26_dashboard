@@ -32,15 +32,15 @@ export function HumanMonitoringPage({ data = {}, history = [], thresholds = {} }
   }));
 
   return (
-    <div className="space-y-6 font-jakarta text-slate-900 select-none">
+    <div className="space-y-6 font-jakarta text-white select-none">
       
       {/* Title Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/80 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-violet-500/20 pb-5">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 font-outfit uppercase">
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-outfit uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
             HUMAN VITAL & RESPIRATION MONITORING
           </h1>
-          <p className="text-xs text-slate-500 font-sans mt-1">
+          <p className="text-xs text-violet-300/70 font-sans mt-1">
             24GHz mmWave radar contactless human presence & respiration movement telemetry
           </p>
         </div>
@@ -55,25 +55,25 @@ export function HumanMonitoringPage({ data = {}, history = [], thresholds = {} }
 
       {/* COMPACT STATUS VISUALIZATION PILLS */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-center justify-between font-mono text-xs shadow-md">
-          <span className="text-slate-500 font-bold uppercase">PERSON PRESENCE</span>
+        <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-2xl p-4 flex items-center justify-between font-mono text-xs shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+          <span className="text-violet-300/70 font-bold uppercase">PERSON PRESENCE</span>
           <span className={`font-bold px-3 py-1 rounded-full border ${
-            presence ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300'
+            presence ? 'bg-emerald-900/30 text-emerald-400 border-emerald-500/30' : 'bg-rose-900/30 text-rose-400 border-rose-500/30'
           }`}>
             ● {presence ? 'DETECTED' : 'NOT DETECTED'}
           </span>
         </div>
 
-        <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-center justify-between font-mono text-xs shadow-md">
-          <span className="text-slate-500 font-bold uppercase">BREATHING STATUS</span>
-          <span className="font-bold text-slate-900 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+        <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-2xl p-4 flex items-center justify-between font-mono text-xs shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+          <span className="text-violet-300/70 font-bold uppercase">BREATHING STATUS</span>
+          <span className="font-bold text-white bg-obsidian-900 px-3 py-1 rounded-full border border-violet-500/30">
             {statusLabel}
           </span>
         </div>
 
-        <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-center justify-between font-mono text-xs shadow-md">
-          <span className="text-slate-500 font-bold uppercase">RADAR SIGNAL</span>
-          <span className="font-bold text-cyan-800 bg-cyan-100 px-3 py-1 rounded-full border border-cyan-300">
+        <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-2xl p-4 flex items-center justify-between font-mono text-xs shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+          <span className="text-violet-300/70 font-bold uppercase">RADAR SIGNAL</span>
+          <span className="font-bold text-cyan-400 bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">
             {signalQuality.toUpperCase()} (EXCELLENT)
           </span>
         </div>
@@ -83,54 +83,54 @@ export function HumanMonitoringPage({ data = {}, history = [], thresholds = {} }
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         {/* Left Column (Col 5 / 12) - Primary Breathing Rate Big Display */}
-        <div className="lg:col-span-5 bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-5 bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] flex flex-col justify-between space-y-6">
           
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span className="text-xs font-mono font-bold text-slate-600 uppercase flex items-center gap-1.5">
+          <div className="flex items-center justify-between border-b border-violet-500/20 pb-3">
+            <span className="text-xs font-mono font-bold text-violet-200 uppercase flex items-center gap-1.5">
               <UserCheck className="w-4 h-4 text-emerald-600" />
               Respiration Frequency
             </span>
-            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold">
+            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-900/30 text-emerald-400 border border-emerald-500/30 font-bold">
               {mr24.confidence || 98}% Radar Match
             </span>
           </div>
 
           {/* Large Breathing Rate BPM Display */}
           <div className="text-center py-4">
-            <div className="text-7xl font-extrabold font-outfit text-slate-900 tracking-tight">
+            <div className="text-7xl font-extrabold font-outfit text-white tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
               {bpm}
             </div>
-            <div className="text-lg font-mono text-emerald-600 font-extrabold tracking-widest mt-1">
+            <div className="text-lg font-mono text-emerald-400 font-extrabold tracking-widest mt-1">
               BPM
             </div>
 
-            <div className="mt-4 inline-block px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-mono font-bold text-slate-800">
-              STATUS: <span className="text-emerald-600">{statusLabel}</span>
+            <div className="mt-4 inline-block px-4 py-1.5 rounded-full bg-obsidian-900 border border-violet-500/30 text-xs font-mono font-bold text-white shadow-[0_0_10px_rgba(139,92,246,0.2)]">
+              STATUS: <span className="text-emerald-400">{statusLabel}</span>
             </div>
           </div>
 
           {/* Breathing Metrics Breakdown Grid */}
-          <div className="grid grid-cols-3 gap-2 text-center font-mono text-xs pt-4 border-t border-slate-100">
-            <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
-              <div className="text-[10px] text-slate-500 font-bold">AVG RATE</div>
-              <div className="text-base font-extrabold text-slate-900 mt-0.5">{avgBpm} BPM</div>
+          <div className="grid grid-cols-3 gap-2 text-center font-mono text-xs pt-4 border-t border-violet-500/20">
+            <div className="bg-obsidian-900 p-2.5 rounded-2xl border border-violet-500/20">
+              <div className="text-[10px] text-violet-400/70 font-bold">AVG RATE</div>
+              <div className="text-base font-extrabold text-white mt-0.5">{avgBpm} BPM</div>
             </div>
-            <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
-              <div className="text-[10px] text-slate-500 font-bold">MIN RATE</div>
-              <div className="text-base font-extrabold text-cyan-600 mt-0.5">{minBpm} BPM</div>
+            <div className="bg-obsidian-900 p-2.5 rounded-2xl border border-violet-500/20">
+              <div className="text-[10px] text-violet-400/70 font-bold">MIN RATE</div>
+              <div className="text-base font-extrabold text-cyan-400 mt-0.5">{minBpm} BPM</div>
             </div>
-            <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
-              <div className="text-[10px] text-slate-500 font-bold">MAX RATE</div>
-              <div className="text-base font-extrabold text-rose-600 mt-0.5">{maxBpm} BPM</div>
+            <div className="bg-obsidian-900 p-2.5 rounded-2xl border border-violet-500/20">
+              <div className="text-[10px] text-violet-400/70 font-bold">MAX RATE</div>
+              <div className="text-base font-extrabold text-rose-400 mt-0.5">{maxBpm} BPM</div>
             </div>
           </div>
 
         </div>
 
         {/* Right Column (Col 7 / 12) - Live Respiration Waveform Graph */}
-        <div className="lg:col-span-7 bg-slate-900 text-white rounded-3xl p-6 shadow-xl space-y-4 flex flex-col justify-between border border-slate-800">
+        <div className="lg:col-span-7 bg-obsidian-950 text-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.15)] space-y-4 flex flex-col justify-between border border-violet-500/30">
           
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="flex items-center justify-between border-b border-violet-500/20 pb-3">
             <h3 className="font-outfit text-sm font-bold text-white flex items-center gap-2">
               <Waves className="w-4 h-4 text-[#D4FF00]" />
               <span>LIVE RESPIRATION WAVEFORM (24GHz RADAR)</span>
@@ -139,7 +139,7 @@ export function HumanMonitoringPage({ data = {}, history = [], thresholds = {} }
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsWaveformPaused(!isWaveformPaused)}
-                className="px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-mono text-white flex items-center gap-1.5 transition-all"
+                className="px-3 py-1 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-violet-500/30 text-xs font-mono text-white flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(139,92,246,0.2)]"
               >
                 {isWaveformPaused ? <Play className="w-3.5 h-3.5 text-emerald-400" /> : <Pause className="w-3.5 h-3.5 text-amber-400" />}
                 <span>{isWaveformPaused ? 'RESUME' : 'PAUSE'}</span>
@@ -157,16 +157,16 @@ export function HumanMonitoringPage({ data = {}, history = [], thresholds = {} }
                     <stop offset="95%" stopColor="#D4FF00" stopOpacity={0.0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" vertical={false} />
-                <XAxis dataKey="time" stroke="#64748B" fontSize={10} tickLine={false} fontFamily="monospace" />
-                <YAxis stroke="#64748B" fontSize={10} tickLine={false} domain={[-1.2, 1.2]} fontFamily="monospace" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#2e1065" vertical={false} />
+                <XAxis dataKey="time" stroke="#a78bfa" fontSize={10} tickLine={false} fontFamily="monospace" />
+                <YAxis stroke="#a78bfa" fontSize={10} tickLine={false} domain={[-1.2, 1.2]} fontFamily="monospace" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0F172A',
-                    borderColor: '#334155',
+                    backgroundColor: '#0c0a1a', // obsidian-900
+                    borderColor: 'rgba(139, 92, 246, 0.2)', // violet-500/20
                     borderRadius: '12px',
                     fontSize: '11px',
-                    color: '#F8FAFC'
+                    color: '#ede9fe' // violet-100
                   }}
                 />
                 <Area type="monotone" dataKey="signal" name="Radar Respiration Signal" stroke="#D4FF00" strokeWidth={2.5} fillOpacity={1} fill="url(#waveColor)" />
@@ -174,7 +174,7 @@ export function HumanMonitoringPage({ data = {}, history = [], thresholds = {} }
             </ResponsiveContainer>
           </div>
 
-          <div className="flex justify-between items-center text-xs font-mono text-slate-400 pt-2 border-t border-slate-800">
+          <div className="flex justify-between items-center text-xs font-mono text-violet-300/70 pt-2 border-t border-violet-500/20">
             <span>Real-time Doppler Radar Frequency</span>
             <span>Sampling: 50ms</span>
           </div>

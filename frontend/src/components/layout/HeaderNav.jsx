@@ -45,19 +45,19 @@ export function HeaderNav({
 
   return (
     <>
-      <header className="bg-white/95 border-b border-slate-200/80 px-4 md:px-6 py-2.5 min-h-[4rem] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 text-slate-900 font-jakarta select-none shadow-sm sticky top-0 z-50 backdrop-blur-md">
+      <header className="bg-[#0c061a]/95 border-b border-violet-900/40 px-4 md:px-6 py-2.5 min-h-[4rem] flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 text-slate-100 font-jakarta select-none shadow-lg shadow-black/50 sticky top-0 z-50 backdrop-blur-xl">
         
         {/* Brand & Main Title */}
         <div className="flex items-center gap-3 shrink-0">
-          <div className="w-9 h-9 rounded-2xl bg-slate-900 flex items-center justify-center shadow-md">
-            <Activity className="w-5 h-5 text-[#D4FF00] animate-pulse" />
+          <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-700 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.4)] border border-violet-400/40">
+            <Activity className="w-5 h-5 text-white animate-pulse" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-outfit text-base md:text-lg font-extrabold tracking-tight text-slate-900 whitespace-nowrap">
+              <h1 className="font-outfit text-base md:text-lg font-extrabold tracking-tight text-white whitespace-nowrap">
                 VEGA Workstation
               </h1>
-              <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold border border-emerald-300">
+              <span className="hidden sm:inline-block text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-violet-950/80 text-violet-300 font-bold border border-violet-700/60 shadow-sm">
                 LIVE MONITORING
               </span>
             </div>
@@ -72,14 +72,14 @@ export function HeaderNav({
             onClick={() => setShowModal(true)}
             className={`px-3 py-1.5 rounded-full border text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 ${
               isConnected
-                ? 'bg-emerald-500 text-white border-emerald-600 shadow-md animate-pulse'
+                ? 'bg-emerald-600 text-white border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.4)] animate-pulse'
                 : isConnecting
-                ? 'bg-amber-100 border-amber-300 text-amber-800'
-                : 'bg-slate-900 text-white border-slate-800 hover:bg-slate-800 shadow-sm'
+                ? 'bg-amber-950/70 border-amber-700/60 text-amber-300'
+                : 'bg-violet-950/80 text-violet-200 border-violet-700/60 hover:bg-violet-900/80 hover:text-white shadow-sm'
             }`}
             title="Connect / Manage VEGA ARIES v2.0 RISC-V USB Data Transmission"
           >
-            <Cpu className="w-3.5 h-3.5 text-[#D4FF00]" />
+            <Cpu className="w-3.5 h-3.5 text-violet-400" />
             <span>
               {isConnected
                 ? `VEGA (USB): ONLINE`
@@ -95,13 +95,13 @@ export function HeaderNav({
           {/* Live Indicator */}
           <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-[11px] border whitespace-nowrap shrink-0 ${
             !isOnline 
-              ? 'bg-rose-100 border-rose-300 text-rose-800'
+              ? 'bg-rose-950/70 border-rose-800/60 text-rose-300'
               : isPaused
-              ? 'bg-amber-100 border-amber-300 text-amber-800'
-              : 'bg-emerald-100 border-emerald-300 text-emerald-800'
+              ? 'bg-amber-950/70 border-amber-800/60 text-amber-300'
+              : 'bg-emerald-950/70 border-emerald-800/60 text-emerald-300'
           }`}>
             <span className={`w-2 h-2 rounded-full ${
-              !isOnline ? 'bg-rose-600' : isPaused ? 'bg-amber-500' : 'bg-emerald-500 animate-ping'
+              !isOnline ? 'bg-rose-500' : isPaused ? 'bg-amber-400' : 'bg-emerald-400 animate-ping'
             }`} />
             <span>{!isOnline ? 'OFFLINE' : isPaused ? 'PAUSED' : 'LIVE DATA'}</span>
           </div>
@@ -111,8 +111,8 @@ export function HeaderNav({
             onClick={() => onToggleDemoMode(!demoMode)}
             className={`px-3 py-1.5 rounded-full border text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 ${
               demoMode
-                ? 'bg-slate-800 text-slate-200 border-slate-700'
-                : 'bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200'
+                ? 'bg-violet-600 text-white border-violet-400/50 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
+                : 'bg-violet-950/60 text-violet-300 border-violet-800/50 hover:bg-violet-900/60'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -123,9 +123,9 @@ export function HeaderNav({
           <button
             onClick={onTogglePause}
             title={isPaused ? 'Resume Live Stream' : 'Pause Live Updates'}
-            className="p-1.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all shrink-0"
+            className="p-1.5 rounded-xl bg-violet-950/70 border border-violet-800/60 text-violet-200 hover:bg-violet-900/80 hover:text-white transition-all shrink-0"
           >
-            {isPaused ? <Play className="w-4 h-4 text-emerald-600" /> : <Pause className="w-4 h-4 text-amber-600" />}
+            {isPaused ? <Play className="w-4 h-4 text-emerald-400" /> : <Pause className="w-4 h-4 text-amber-400" />}
           </button>
 
           {/* Alert Counter Bell */}
@@ -133,13 +133,13 @@ export function HeaderNav({
             onClick={onOpenAlerts}
             className={`relative p-1.5 rounded-xl border font-bold text-xs flex items-center justify-center transition-all shrink-0 ${
               activeAlertCount > 0
-                ? 'bg-rose-100 border-rose-300 text-rose-700 animate-pulse'
-                : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
+                ? 'bg-rose-950/80 border-rose-600 text-rose-300 animate-pulse'
+                : 'bg-violet-950/70 border-violet-800/60 text-violet-200 hover:bg-violet-900/80 hover:text-white'
             }`}
           >
             <Bell className="w-4 h-4" />
             {activeAlertCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[9px] font-extrabold rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[9px] font-extrabold rounded-full flex items-center justify-center shadow-sm">
                 {activeAlertCount}
               </span>
             )}
@@ -147,12 +147,12 @@ export function HeaderNav({
 
           {/* User Profile & Sign Out Control */}
           {user && (
-            <div className="flex items-center gap-2 pl-2 border-l border-slate-200 shrink-0">
-              <div className="flex items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1 rounded-xl text-xs">
-                <span className={`w-2 h-2 rounded-full ${user.role === 'doctor' ? 'bg-emerald-500' : 'bg-cyan-500'}`} />
-                <span className="font-bold text-slate-800 font-outfit whitespace-nowrap">{user.name}</span>
+            <div className="flex items-center gap-2 pl-2 border-l border-violet-900/50 shrink-0">
+              <div className="flex items-center gap-2 bg-violet-950/70 border border-violet-800/60 px-3 py-1 rounded-xl text-xs">
+                <span className={`w-2 h-2 rounded-full ${user.role === 'doctor' ? 'bg-violet-400 shadow-[0_0_8px_#c084fc]' : 'bg-cyan-400'}`} />
+                <span className="font-bold text-violet-100 font-outfit whitespace-nowrap">{user.name}</span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
-                  user.role === 'doctor' ? 'bg-emerald-100 text-emerald-800' : 'bg-cyan-100 text-cyan-800'
+                  user.role === 'doctor' ? 'bg-violet-500/20 text-violet-300 border border-violet-500/40' : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
                 }`}>
                   {user.role === 'doctor' ? 'Doctor' : 'Parent'}
                 </span>
@@ -161,7 +161,7 @@ export function HeaderNav({
               <button
                 onClick={onLogout}
                 title="Sign Out / Switch User"
-                className="px-3 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-sm whitespace-nowrap"
+                className="px-3 py-1 rounded-xl bg-violet-800 hover:bg-violet-700 text-white font-bold text-xs transition-all shadow-[0_0_12px_rgba(147,51,234,0.3)] border border-violet-600/50 whitespace-nowrap"
               >
                 <span>Sign Out</span>
               </button>
@@ -173,39 +173,39 @@ export function HeaderNav({
 
       {/* VEGA ARIES v2.0 USB Serial Connection Dialog Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-[100] bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-md w-full text-white space-y-5 shadow-2xl animate-in fade-in zoom-in-95 font-jakarta">
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#120726] border border-violet-700/50 rounded-3xl p-6 max-w-md w-full text-white space-y-5 shadow-[0_0_50px_rgba(147,51,234,0.25)] animate-in fade-in zoom-in-95 font-jakarta">
             
-            <div className="flex justify-between items-center border-b border-slate-800 pb-4">
+            <div className="flex justify-between items-center border-b border-violet-900/60 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
-                  <Usb className="w-5 h-5 text-[#D4FF00]" />
+                <div className="p-2.5 rounded-2xl bg-violet-600/20 border border-violet-500/40">
+                  <Usb className="w-5 h-5 text-violet-300" />
                 </div>
                 <div>
                   <h3 className="font-outfit font-extrabold text-base text-white">
                     VEGA ARIES v2.0 Hardware Link
                   </h3>
-                  <p className="text-xs text-slate-400 font-mono">
+                  <p className="text-xs text-violet-300/70 font-mono">
                     Direct USB UART Web Serial Transmission
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setShowModal(false)}
-                className="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"
+                className="p-1.5 rounded-xl hover:bg-violet-900/60 text-violet-300 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Connection Status Box */}
-            <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 space-y-3 font-mono text-xs">
+            <div className="bg-[#0b0416] border border-violet-900/60 rounded-2xl p-4 space-y-3 font-mono text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">USB Status:</span>
+                <span className="text-violet-300/70">USB Status:</span>
                 <span className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
                   isConnected 
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' 
-                    : 'bg-slate-800 text-slate-400'
+                    : 'bg-violet-950 text-violet-400 border border-violet-800/40'
                 }`}>
                   {isConnected ? 'CONNECTED' : 'DISCONNECTED'}
                 </span>
@@ -213,11 +213,11 @@ export function HeaderNav({
 
               {isConnected && portInfo && (
                 <>
-                  <div className="flex items-center justify-between text-slate-300">
+                  <div className="flex items-center justify-between text-violet-200">
                     <span>Target Board:</span>
-                    <span className="font-bold text-[#D4FF00]">{portInfo.displayName}</span>
+                    <span className="font-bold text-violet-300">{portInfo.displayName}</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-300">
+                  <div className="flex items-center justify-between text-violet-200">
                     <span>Packets Received:</span>
                     <span className="font-bold text-cyan-400">{packetsReceived} pkts ({bytesReceived} bytes)</span>
                   </div>
@@ -234,14 +234,14 @@ export function HeaderNav({
 
             {/* Config & Controls */}
             <div className="space-y-3">
-              <label className="block text-xs font-mono text-slate-300 font-bold">
+              <label className="block text-xs font-mono text-violet-200 font-bold">
                 UART Baud Rate Configuration:
               </label>
               <select
                 value={baudRate}
                 onChange={(e) => setBaudRate(e.target.value)}
                 disabled={isConnected}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white font-mono focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full bg-[#0b0416] border border-violet-800/60 rounded-xl px-3 py-2 text-xs text-white font-mono focus:ring-2 focus:ring-violet-500 outline-none"
               >
                 <option value="115200">115200 Baud (VEGA ARIES v2.0 Standard)</option>
                 <option value="9600">9600 Baud (Low Speed)</option>
@@ -256,15 +256,15 @@ export function HeaderNav({
                 <button
                   onClick={handleConnectUSB}
                   disabled={isConnecting || !isSupported}
-                  className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs font-outfit uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all"
+                  className="flex-1 bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-500 hover:to-purple-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs font-outfit uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(147,51,234,0.4)] border border-violet-400/30 transition-all"
                 >
-                  <Zap className="w-4 h-4 text-[#D4FF00]" />
+                  <Zap className="w-4 h-4 text-violet-200" />
                   <span>{isConnecting ? 'Requesting Port Access...' : 'Select USB Port & Connect'}</span>
                 </button>
               ) : (
                 <button
                   onClick={() => { disconnect(); setShowModal(false); }}
-                  className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs font-outfit uppercase tracking-wider transition-all"
+                  className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs font-outfit uppercase tracking-wider transition-all shadow-md"
                 >
                   Disconnect VEGA ARIES USB
                 </button>
@@ -272,7 +272,7 @@ export function HeaderNav({
             </div>
 
             {!isSupported && (
-              <p className="text-[11px] text-amber-400/90 text-center font-mono">
+              <p className="text-[11px] text-amber-300/90 text-center font-mono">
                 ⚠️ Web Serial API is only supported in desktop Chrome, Edge, and Opera.
               </p>
             )}

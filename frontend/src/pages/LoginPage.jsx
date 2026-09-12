@@ -32,36 +32,36 @@ export function LoginPage({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-[#F4F7FA] flex flex-col items-center justify-center p-4 font-jakarta relative overflow-hidden select-none">
+    <div className="min-h-screen bg-[#080312] text-[#f1f0f7] flex flex-col items-center justify-center p-4 font-jakarta relative overflow-hidden select-none">
       
       {/* Background Neon Glowing Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4FF00]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-md space-y-6 z-10">
         
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-3xl bg-slate-900 border border-white/20 shadow-2xl mb-2">
-            <Activity className="w-8 h-8 text-[#D4FF00] animate-pulse" />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-3xl bg-gradient-to-br from-violet-600 to-indigo-800 border border-violet-400/40 shadow-[0_0_25px_rgba(168,85,247,0.4)] mb-2">
+            <Activity className="w-8 h-8 text-white animate-pulse" />
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold font-outfit uppercase tracking-tight text-white">
             SMART HEALTH & SAFETY
           </h1>
-          <p className="text-xs text-white/60 font-sans">
+          <p className="text-xs text-violet-300/70 font-sans">
             Real-Time Environmental & Human Monitoring Portal
           </p>
         </div>
 
         {/* Role Selector Tabs (Doctor vs Patient/Parent) */}
-        <div className="bg-slate-900/90 border border-white/15 p-1.5 rounded-2xl flex gap-1 shadow-xl backdrop-blur-xl">
+        <div className="bg-[#120726]/90 border border-violet-900/60 p-1.5 rounded-2xl flex gap-1 shadow-xl backdrop-blur-xl">
           <button
             type="button"
             onClick={() => setRole('doctor')}
             className={`flex-1 py-2.5 px-3 rounded-xl font-outfit font-bold text-xs flex items-center justify-center gap-2 transition-all ${
               role === 'doctor'
-                ? 'bg-[#D4FF00] text-slate-950 shadow-[0_0_15px_rgba(212,255,0,0.3)]'
-                : 'text-white/60 hover:text-white hover:bg-white/5'
+                ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-[0_0_20px_rgba(147,51,234,0.5)] border border-violet-400/40'
+                : 'text-violet-300/70 hover:text-white hover:bg-violet-950/40'
             }`}
           >
             <Stethoscope className="w-4 h-4" />
@@ -73,8 +73,8 @@ export function LoginPage({ onLogin }) {
             onClick={() => setRole('patient')}
             className={`flex-1 py-2.5 px-3 rounded-xl font-outfit font-bold text-xs flex items-center justify-center gap-2 transition-all ${
               role === 'patient'
-                ? 'bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]'
-                : 'text-white/60 hover:text-white hover:bg-white/5'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_0_20px_rgba(168,85,247,0.5)] border border-violet-400/40'
+                : 'text-violet-300/70 hover:text-white hover:bg-violet-950/40'
             }`}
           >
             <Heart className="w-4 h-4" />
@@ -82,14 +82,14 @@ export function LoginPage({ onLogin }) {
           </button>
         </div>
 
-        {/* AUTH CARD FORM CONTAINER (Matching User's Uploaded Screenshot Design!) */}
-        <div className="bg-white text-slate-900 rounded-[32px] p-6 sm:p-8 shadow-2xl space-y-5 border border-white/20">
+        {/* AUTH CARD FORM CONTAINER */}
+        <div className="bg-[#120726]/95 text-white rounded-[32px] p-6 sm:p-8 shadow-[0_0_50px_rgba(126,34,206,0.25)] space-y-5 border border-violet-800/50 backdrop-blur-2xl">
           
           <div className="text-center space-y-1">
-            <h2 className="text-xl font-extrabold font-outfit text-slate-900">
+            <h2 className="text-xl font-extrabold font-outfit text-white">
               {isSignUp ? 'Create Your Account' : `Sign in as ${role === 'doctor' ? 'Doctor' : 'Patient/Parent'}`}
             </h2>
-            <p className="text-xs text-slate-500 font-sans">
+            <p className="text-xs text-violet-300/70 font-sans">
               {role === 'doctor' 
                 ? 'Access clinical patient diagnostics, telemetry & sensor arrays'
                 : 'View live vital monitoring, baby environment & room safety data'
@@ -97,12 +97,12 @@ export function LoginPage({ onLogin }) {
             </p>
           </div>
 
-          {/* Social Login Buttons (Google & Facebook matching photo!) */}
+          {/* Social Login Buttons */}
           <div className="space-y-2.5">
             <button
               type="button"
               onClick={() => handleOAuthLogin('Google')}
-              className="w-full py-2.5 px-4 rounded-2xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs flex items-center justify-center gap-3 transition-all shadow-sm active:scale-98"
+              className="w-full py-2.5 px-4 rounded-2xl border border-violet-800/60 hover:border-violet-600 bg-[#1a0c38] hover:bg-[#251050] text-violet-100 font-semibold text-xs flex items-center justify-center gap-3 transition-all shadow-sm active:scale-98"
             >
               {/* Google Colored Logo SVG */}
               <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -117,7 +117,7 @@ export function LoginPage({ onLogin }) {
             <button
               type="button"
               onClick={() => handleOAuthLogin('Facebook')}
-              className="w-full py-2.5 px-4 rounded-2xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs flex items-center justify-center gap-3 transition-all shadow-sm active:scale-98"
+              className="w-full py-2.5 px-4 rounded-2xl border border-violet-800/60 hover:border-violet-600 bg-[#1a0c38] hover:bg-[#251050] text-violet-100 font-semibold text-xs flex items-center justify-center gap-3 transition-all shadow-sm active:scale-98"
             >
               {/* Facebook Logo SVG */}
               <svg className="w-4 h-4 fill-[#1877F2]" viewBox="0 0 24 24">
@@ -127,11 +127,11 @@ export function LoginPage({ onLogin }) {
             </button>
           </div>
 
-          {/* OR Divider Line (Exact match to screenshot!) */}
+          {/* OR Divider Line */}
           <div className="relative flex py-1 items-center justify-center">
-            <div className="flex-grow border-t border-slate-200"></div>
-            <span className="flex-shrink mx-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">OR</span>
-            <div className="flex-grow border-t border-slate-200"></div>
+            <div className="flex-grow border-t border-violet-900/60"></div>
+            <span className="flex-shrink mx-4 text-[11px] font-bold text-violet-400/60 uppercase tracking-widest">OR</span>
+            <div className="flex-grow border-t border-violet-900/60"></div>
           </div>
 
           {/* Direct Email Form */}
@@ -139,77 +139,77 @@ export function LoginPage({ onLogin }) {
             
             {isSignUp && (
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                <label className="block text-xs font-semibold text-violet-200 mb-1">Full Name</label>
                 <input
                   type="text"
                   required
                   placeholder={role === 'doctor' ? 'Dr. Sarah Jenkins' : 'Alex Johnson'}
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 text-xs font-sans text-slate-900 bg-slate-50 focus:bg-white transition-all outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-violet-800/70 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 text-xs font-sans text-white placeholder-violet-400/40 bg-[#0b0416] transition-all outline-none"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Email</label>
+              <label className="block text-xs font-semibold text-violet-200 mb-1">Email</label>
               <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+                <Mail className="w-4 h-4 absolute left-3.5 top-3 text-violet-400" />
                 <input
                   type="email"
                   required
                   placeholder={role === 'doctor' ? 'doctor@hospital.org' : 'you@example.com'}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 text-xs font-sans text-slate-900 bg-slate-50 focus:bg-white transition-all outline-none"
+                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-violet-800/70 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 text-xs font-sans text-white placeholder-violet-400/40 bg-[#0b0416] transition-all outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+              <label className="block text-xs font-semibold text-violet-200 mb-1">Password</label>
               <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+                <Lock className="w-4 h-4 absolute left-3.5 top-3 text-violet-400" />
                 <input
                   type="password"
                   required
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 text-xs font-sans text-slate-900 bg-slate-50 focus:bg-white transition-all outline-none"
+                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-violet-800/70 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 text-xs font-sans text-white placeholder-violet-400/40 bg-[#0b0416] transition-all outline-none"
                 />
               </div>
             </div>
 
             {role === 'patient' && (
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Patient Monitoring ID</label>
+                <label className="block text-xs font-semibold text-violet-200 mb-1">Patient Monitoring ID</label>
                 <input
                   type="text"
                   placeholder="PAT-9842"
                   value={patientId}
                   onChange={(e) => setPatientId(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 text-xs font-sans text-slate-900 bg-slate-50 focus:bg-white transition-all outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-violet-800/70 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 text-xs font-sans text-white placeholder-violet-400/40 bg-[#0b0416] transition-all outline-none"
                 />
               </div>
             )}
 
-            {/* Sign in Button (Matching Screenshot styling) */}
+            {/* Sign in Button */}
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 text-white font-outfit font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2 active:scale-98"
+              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-outfit font-bold text-xs shadow-[0_0_20px_rgba(147,51,234,0.45)] border border-violet-400/40 transition-all flex items-center justify-center gap-2 active:scale-98"
             >
               <span>{isSignUp ? 'Create Account & Access Workstation' : `Sign in as ${role === 'doctor' ? 'Doctor' : 'Parent/Patient'}`}</span>
-              <ArrowRight className="w-4 h-4 text-[#D4FF00]" />
+              <ArrowRight className="w-4 h-4 text-violet-200" />
             </button>
           </form>
 
-          {/* Footer Links (Forgot password? / Need an account? Sign up) */}
-          <div className="flex items-center justify-between pt-2 text-[11px] text-slate-500 font-sans">
+          {/* Footer Links */}
+          <div className="flex items-center justify-between pt-2 text-[11px] text-violet-400/70 font-sans">
             <button 
               type="button"
               onClick={() => alert('Password reset link sent to your registered email address.')}
-              className="hover:text-slate-900 transition-colors font-medium"
+              className="hover:text-violet-200 transition-colors font-medium"
             >
               Forgot password?
             </button>
@@ -217,7 +217,7 @@ export function LoginPage({ onLogin }) {
             <button 
               type="button"
               onClick={() => setIsSignUp(!isSignUp)}
-              className="hover:text-slate-900 transition-colors font-semibold text-slate-800"
+              className="hover:text-white transition-colors font-semibold text-violet-300"
             >
               {isSignUp ? 'Already have an account? Sign in' : 'Need an account? Sign up'}
             </button>
@@ -226,24 +226,24 @@ export function LoginPage({ onLogin }) {
         </div>
 
         {/* Quick Demo Access Bar */}
-        <div className="bg-slate-900/80 border border-white/10 p-4 rounded-2xl text-xs space-y-2 backdrop-blur-xl">
-          <div className="text-white/60 font-mono text-[10px] uppercase font-bold text-center">QUICK ONE-CLICK DEMO SIGN IN</div>
+        <div className="bg-[#0e0520]/90 border border-violet-900/60 p-4 rounded-2xl text-xs space-y-2 backdrop-blur-xl">
+          <div className="text-violet-400/70 font-mono text-[10px] uppercase font-bold text-center">QUICK ONE-CLICK DEMO SIGN IN</div>
           <div className="grid grid-cols-2 gap-2 font-mono">
             <button
               type="button"
               onClick={() => onLogin({ email: 'dr.jenkins@hospital.org', name: 'Dr. Sarah Jenkins', role: 'doctor', patientId: 'PAT-9842' })}
-              className="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-[#D4FF00] font-bold text-[11px] flex items-center justify-center gap-1.5 transition-all"
+              className="px-3 py-2 rounded-xl bg-violet-950/60 hover:bg-violet-900/60 border border-violet-800/60 text-violet-300 font-bold text-[11px] flex items-center justify-center gap-1.5 transition-all shadow-sm"
             >
-              <Stethoscope className="w-3.5 h-3.5" />
+              <Stethoscope className="w-3.5 h-3.5 text-violet-400" />
               <span>Doctor Demo</span>
             </button>
 
             <button
               type="button"
               onClick={() => onLogin({ email: 'parent@cradlesense.io', name: 'Alex Johnson (Parent)', role: 'patient', patientId: 'PAT-9842' })}
-              className="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-cyan-300 font-bold text-[11px] flex items-center justify-center gap-1.5 transition-all"
+              className="px-3 py-2 rounded-xl bg-violet-950/60 hover:bg-violet-900/60 border border-violet-800/60 text-purple-300 font-bold text-[11px] flex items-center justify-center gap-1.5 transition-all shadow-sm"
             >
-              <Heart className="w-3.5 h-3.5" />
+              <Heart className="w-3.5 h-3.5 text-purple-400" />
               <span>Parent Demo</span>
             </button>
           </div>

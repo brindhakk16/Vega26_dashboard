@@ -139,61 +139,61 @@ sudo usermod -a -G dialout,plugdev $USER
 sudo udevadm control --reload-rules && sudo udevadm trigger`;
 
   return (
-    <div className="p-4 md:p-8 space-y-8 font-jakarta text-slate-900 select-none">
+    <div className="p-4 md:p-8 space-y-8 font-jakarta text-white select-none">
       
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/80 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-violet-500/20 pb-5">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 font-outfit uppercase flex items-center gap-2.5">
-            <Settings className="w-7 h-7 text-emerald-600" />
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-outfit uppercase flex items-center gap-2.5 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+            <Settings className="w-7 h-7 text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
             <span>WORKSTATION SETTINGS & HARDWARE DATA LINK</span>
           </h1>
-          <p className="text-xs text-slate-500 font-sans mt-1">
+          <p className="text-xs text-violet-300/70 font-sans mt-1">
             Configure direct USB hardware serial link, WiFi remote streaming, backend server endpoints & display preferences
           </p>
         </div>
 
         <button
           onClick={onResetDefaults}
-          className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-xs font-mono flex items-center gap-1.5 transition-all"
+          className="px-4 py-2 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 border border-violet-500/30 text-violet-200 font-bold text-xs font-mono flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(139,92,246,0.1)]"
         >
-          <RotateCcw className="w-3.5 h-3.5" />
+          <RotateCcw className="w-3.5 h-3.5 text-violet-400" />
           <span>RESET DEFAULTS</span>
         </button>
       </div>
 
       {/* SECTION 1: HARDWARE DATA CONNECTION SELECTOR (USB SERIAL vs LOCAL WIFI) */}
-      <div className="bg-slate-900 text-white rounded-[32px] p-6 sm:p-8 shadow-2xl space-y-6 border border-slate-800">
+      <div className="bg-obsidian-800/80 backdrop-blur-md text-white rounded-[32px] p-6 sm:p-8 shadow-[0_4px_20px_rgba(139,92,246,0.15)] space-y-6 border border-violet-500/20">
         
         {/* Mode Selector Tabs */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-violet-500/20 pb-5">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
-              {activeConnMode === 'usb' ? <Usb className="w-7 h-7 text-[#D4FF00]" /> : <Wifi className="w-7 h-7 text-cyan-400" />}
+            <div className="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30">
+              {activeConnMode === 'usb' ? <Usb className="w-7 h-7 text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" /> : <Wifi className="w-7 h-7 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="font-outfit font-extrabold text-xl text-white">
+                <h2 className="font-outfit font-extrabold text-xl text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">
                   VEGA ARIES v2.0 Telemetry Data Link
                 </h2>
-                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/40">
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-900/30 text-emerald-400 font-bold border border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.1)]">
                   C-DAC RISC-V HARDWARE
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-mono mt-0.5">
+              <p className="text-xs text-violet-300/70 font-mono mt-0.5">
                 Select Hardware Connection Protocol (Direct USB Serial or Local WiFi Server)
               </p>
             </div>
           </div>
 
           {/* Connection Mode Toggle Pills */}
-          <div className="flex items-center gap-2 bg-slate-950 p-1.5 rounded-2xl border border-slate-800 font-mono text-xs">
+          <div className="flex items-center gap-2 bg-obsidian-950 p-1.5 rounded-2xl border border-violet-500/20 font-mono text-xs shadow-inner">
             <button
               onClick={() => setActiveConnMode('usb')}
               className={`px-4 py-2 rounded-xl font-bold flex items-center gap-2 transition-all ${
                 activeConnMode === 'usb'
-                  ? 'bg-emerald-500 text-slate-950 shadow-md'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-emerald-500 text-obsidian-950 shadow-[0_0_10px_rgba(52,211,153,0.5)]'
+                  : 'text-violet-400/60 hover:text-white'
               }`}
             >
               <Usb className="w-4 h-4" />
@@ -204,8 +204,8 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
               onClick={() => setActiveConnMode('wifi')}
               className={`px-4 py-2 rounded-xl font-bold flex items-center gap-2 transition-all ${
                 activeConnMode === 'wifi'
-                  ? 'bg-cyan-500 text-slate-950 shadow-md'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-cyan-500 text-obsidian-950 shadow-[0_0_10px_rgba(34,211,238,0.5)]'
+                  : 'text-violet-400/60 hover:text-white'
               }`}
             >
               <Wifi className="w-4 h-4" />
@@ -245,27 +245,27 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
 
             {/* Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs">
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">USB Status:</div>
-                <div className={`font-bold text-sm ${isUsbConnected ? 'text-emerald-400' : 'text-amber-400'}`}>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">USB Status:</div>
+                <div className={`font-bold text-sm ${isUsbConnected ? 'text-emerald-400 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]' : 'text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)]'}`}>
                   {isUsbConnected ? '● CONNECTED' : '○ DISCONNECTED'}
                 </div>
               </div>
 
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">Target USB Port:</div>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">Target USB Port:</div>
                 <div className="text-white font-bold truncate">
                   {portInfo ? portInfo.displayName : '/dev/ttyUSB0 or COMx'}
                 </div>
               </div>
 
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">Baud Rate:</div>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">Baud Rate:</div>
                 <select
                   value={baudRate}
                   onChange={(e) => setBaudRate(e.target.value)}
                   disabled={isUsbConnected}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-[#D4FF00] font-bold outline-none cursor-pointer"
+                  className="w-full bg-obsidian-900 border border-violet-500/30 rounded-lg px-2 py-1 text-xs text-[#D4FF00] font-bold outline-none cursor-pointer drop-shadow-[0_0_5px_rgba(212,255,0,0.3)]"
                 >
                   <option value="115200">115200 Baud (Standard)</option>
                   <option value="9600">9600 Baud</option>
@@ -273,9 +273,9 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
                 </select>
               </div>
 
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">Packets Ingested:</div>
-                <div className="text-cyan-400 font-bold">{usbPackets} pkts ({usbBytes} B)</div>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">Packets Ingested:</div>
+                <div className="text-cyan-400 font-bold drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">{usbPackets} pkts ({usbBytes} B)</div>
               </div>
             </div>
           </div>
@@ -311,10 +311,10 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
             </div>
 
             {/* WiFi Server Address Input */}
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-              <div className="flex justify-between items-center text-slate-300 font-bold">
+            <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-3 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+              <div className="flex justify-between items-center text-violet-300 font-bold">
                 <span>Backend WebSocket Server Endpoint:</span>
-                <span className="text-[#D4FF00]">{isWifiConnected ? '● CONNECTED' : '○ DISCONNECTED'}</span>
+                <span className="text-[#D4FF00] drop-shadow-[0_0_5px_rgba(212,255,0,0.5)]">{isWifiConnected ? '● CONNECTED' : '○ DISCONNECTED'}</span>
               </div>
               <div className="flex gap-2">
                 <input
@@ -323,12 +323,12 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
                   onChange={(e) => setCustomWifiUrl(e.target.value)}
                   disabled={isWifiConnected}
                   placeholder="ws://localhost:5000/ws/vega-wifi"
-                  className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono text-xs focus:ring-2 focus:ring-cyan-500 outline-none"
+                  className="flex-1 bg-obsidian-900 border border-violet-500/30 rounded-xl px-3 py-2 text-white font-mono text-xs focus:ring-2 focus:ring-violet-500 outline-none transition-all"
                 />
                 <button
                   onClick={() => connectWifi(customWifiUrl)}
                   disabled={isWifiConnected}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold rounded-xl"
+                  className="px-4 py-2 bg-obsidian-800 hover:bg-obsidian-700 border border-violet-500/30 text-white font-bold rounded-xl transition-all"
                 >
                   Test Connection
                 </button>
@@ -337,17 +337,17 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
 
             {/* WiFi Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">REST Ingestion Endpoint:</div>
-                <div className="text-cyan-400 font-bold text-[11px]">http://localhost:5000/api/sensor/vega-wifi</div>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">REST Ingestion Endpoint:</div>
+                <div className="text-cyan-400 font-bold text-[11px] drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">http://localhost:5000/api/sensor/vega-wifi</div>
               </div>
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">WiFi Packets Received:</div>
-                <div className="text-emerald-400 font-bold text-sm">{wifiPackets} pkts ({wifiBytes} B)</div>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">WiFi Packets Received:</div>
+                <div className="text-emerald-400 font-bold text-sm drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">{wifiPackets} pkts ({wifiBytes} B)</div>
               </div>
-              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-                <div className="text-slate-400">Last Telemetry Packet:</div>
-                <div className="text-[#D4FF00] font-bold text-sm">{wifiLastTime || 'Idle'}</div>
+              <div className="bg-obsidian-950 p-4 rounded-2xl border border-violet-500/20 space-y-1 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+                <div className="text-violet-400/60">Last Telemetry Packet:</div>
+                <div className="text-[#D4FF00] font-bold text-sm drop-shadow-[0_0_5px_rgba(212,255,0,0.5)]">{wifiLastTime || 'Idle'}</div>
               </div>
             </div>
           </div>
@@ -356,15 +356,15 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
         {/* TERMINAL CONSOLE */}
         <div className="space-y-3 pt-2 font-mono text-xs">
           <div className="flex items-center justify-between">
-            <span className="text-slate-300 font-bold flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-[#D4FF00]" />
+            <span className="text-violet-300 font-bold flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-emerald-400" />
               <span>VEGA ARIES v2.0 Live Stream Console</span>
             </span>
           </div>
 
-          <div className="bg-slate-950 border border-slate-800 rounded-2xl p-4 h-36 overflow-y-auto space-y-1 text-[11px]">
+          <div className="bg-obsidian-950 border border-violet-500/20 rounded-2xl p-4 h-36 overflow-y-auto space-y-1 text-[11px] shadow-inner">
             {terminalLogs.map((log, index) => (
-              <div key={index} className={log.includes('[TX') ? 'text-[#D4FF00]' : log.includes('[ERROR]') ? 'text-rose-400' : 'text-slate-300'}>
+              <div key={index} className={log.includes('[TX') ? 'text-[#D4FF00] drop-shadow-[0_0_2px_rgba(212,255,0,0.8)]' : log.includes('[ERROR]') ? 'text-rose-400' : 'text-violet-300/80'}>
                 {log}
               </div>
             ))}
@@ -377,11 +377,11 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
               onChange={(e) => setCmdInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendCLI()}
               placeholder="Send command string (e.g. CALIBRATE_SENSORS)..."
-              className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
+              className="flex-1 bg-obsidian-950 border border-violet-500/30 rounded-xl px-4 py-2 text-xs text-white placeholder-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-500 font-mono transition-all"
             />
             <button
               onClick={handleSendCLI}
-              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold font-outfit uppercase flex items-center gap-1.5 transition-all shadow"
+              className="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold font-outfit uppercase flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(139,92,246,0.4)]"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Send</span>
@@ -395,17 +395,17 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Environmental Thresholds */}
-        <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md font-mono text-xs space-y-5">
-          <h3 className="text-slate-900 font-extrabold font-outfit text-base border-b border-slate-100 pb-3 flex items-center gap-2 uppercase">
-            <Sliders className="w-5 h-5 text-emerald-600" />
+        <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] font-mono text-xs space-y-5">
+          <h3 className="text-white font-extrabold font-outfit text-base border-b border-violet-500/20 pb-3 flex items-center gap-2 uppercase">
+            <Sliders className="w-5 h-5 text-emerald-400 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]" />
             <span>ENVIRONMENT COMFORT THRESHOLDS (°C)</span>
           </h3>
 
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-1.5">
-                <span className="text-amber-600 font-bold">WARNING THRESHOLD (UPPER):</span>
-                <span className="text-slate-900 font-extrabold">{warningThreshold}°C</span>
+                <span className="text-amber-400 font-bold">WARNING THRESHOLD (UPPER):</span>
+                <span className="text-white font-extrabold">{warningThreshold}°C</span>
               </div>
               <input
                 type="range"
@@ -413,15 +413,15 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
                 max={35}
                 value={warningThreshold}
                 onChange={(e) => onWarningThresholdChange && onWarningThresholdChange(Number(e.target.value))}
-                className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-200 rounded-lg"
+                className="w-full accent-amber-500 cursor-pointer h-2 bg-obsidian-900 border border-violet-500/30 rounded-lg appearance-none"
               />
-              <span className="text-[11px] text-slate-500 font-sans block mt-1">Triggers warm warning status when ambient temp exceeds value.</span>
+              <span className="text-[11px] text-violet-400/60 font-sans block mt-1">Triggers warm warning status when ambient temp exceeds value.</span>
             </div>
 
             <div>
               <div className="flex justify-between mb-1.5">
-                <span className="text-rose-600 font-bold">CRITICAL THRESHOLD (UPPER):</span>
-                <span className="text-slate-900 font-extrabold">{criticalThreshold}°C</span>
+                <span className="text-rose-400 font-bold">CRITICAL THRESHOLD (UPPER):</span>
+                <span className="text-white font-extrabold">{criticalThreshold}°C</span>
               </div>
               <input
                 type="range"
@@ -429,27 +429,27 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
                 max={40}
                 value={criticalThreshold}
                 onChange={(e) => onCriticalThresholdChange && onCriticalThresholdChange(Number(e.target.value))}
-                className="w-full accent-rose-600 cursor-pointer h-2 bg-slate-200 rounded-lg"
+                className="w-full accent-rose-500 cursor-pointer h-2 bg-obsidian-900 border border-violet-500/30 rounded-lg appearance-none"
               />
-              <span className="text-[11px] text-slate-500 font-sans block mt-1">Triggers critical alert when ambient temp reaches high threshold.</span>
+              <span className="text-[11px] text-violet-400/60 font-sans block mt-1">Triggers critical alert when ambient temp reaches high threshold.</span>
             </div>
           </div>
         </div>
 
         {/* Display & Palette Settings */}
-        <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md font-mono text-xs space-y-5">
-          <h3 className="text-slate-900 font-extrabold font-outfit text-base border-b border-slate-100 pb-3 flex items-center gap-2 uppercase">
-            <Palette className="w-5 h-5 text-cyan-600" />
+        <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] font-mono text-xs space-y-5">
+          <h3 className="text-white font-extrabold font-outfit text-base border-b border-violet-500/20 pb-3 flex items-center gap-2 uppercase">
+            <Palette className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]" />
             <span>THERMAL MAP DISPLAY PREFERENCES</span>
           </h3>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-slate-600 font-bold mb-1.5 font-sans">DEFAULT PALETTE:</label>
+              <label className="block text-violet-300/70 font-bold mb-1.5 font-sans">DEFAULT PALETTE:</label>
               <select
                 value={palette}
                 onChange={(e) => onPaletteChange && onPaletteChange(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 font-bold rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-sans"
+                className="w-full bg-obsidian-900 border border-violet-500/30 text-white font-bold rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500 font-sans transition-all"
               >
                 <option value={PALETTES?.IRONBOW || 'ironbow'}>Ironbow (Default Thermal)</option>
                 <option value={PALETTES?.RAINBOW || 'rainbow'}>Rainbow</option>
@@ -460,11 +460,11 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
             </div>
 
             <div>
-              <label className="block text-slate-600 font-bold mb-1.5 font-sans">INTERPOLATION RENDER:</label>
+              <label className="block text-violet-300/70 font-bold mb-1.5 font-sans">INTERPOLATION RENDER:</label>
               <select
                 value={mode}
                 onChange={(e) => onModeChange && onModeChange(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 font-bold rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-sans"
+                className="w-full bg-obsidian-900 border border-violet-500/30 text-white font-bold rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500 font-sans transition-all"
               >
                 <option value="smooth">Smooth (Bilinear Upscale)</option>
                 <option value="pixel">Pixelated (Raw 8x8 matrix)</option>
@@ -473,10 +473,10 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
             </div>
 
             <div>
-              <label className="block text-slate-600 font-bold mb-1.5 font-sans font-mono">TEMPERATURE UNIT:</label>
+              <label className="block text-violet-300/70 font-bold mb-1.5 font-sans font-mono">TEMPERATURE UNIT:</label>
               <button
                 onClick={onToggleUnit}
-                className="px-5 py-2.5 bg-slate-900 text-white rounded-xl font-bold font-sans shadow-md hover:bg-slate-800 transition-all text-xs"
+                className="px-5 py-2.5 bg-violet-600 text-white rounded-xl font-bold font-sans shadow-[0_0_10px_rgba(139,92,246,0.3)] hover:bg-violet-700 transition-all text-xs"
               >
                 ACTIVE UNIT: °{unit}
               </button>
@@ -487,21 +487,21 @@ sudo udevadm control --reload-rules && sudo udevadm trigger`;
       </div>
 
       {/* SECTION 3: VEGA ARIES v2.0 WIFI FIRMWARE CODE TEMPLATE */}
-      <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md space-y-4">
-        <div className="flex justify-between items-center border-b border-slate-200 pb-3">
-          <h3 className="font-outfit text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <Wifi className="w-5 h-5 text-cyan-600" />
+      <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] space-y-4">
+        <div className="flex justify-between items-center border-b border-violet-500/20 pb-3">
+          <h3 className="font-outfit text-base font-extrabold text-white flex items-center gap-2">
+            <Wifi className="w-5 h-5 text-cyan-400" />
             <span>VEGA ARIES v2.0 WiFi C Code Transmission Snippet (ESP32 / ESP8266)</span>
           </h3>
           <button
             onClick={() => copyToClipboard(wifiFirmwareCode, 'WiFi Firmware')}
-            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1 font-mono font-bold"
+            className="text-xs text-violet-400/80 hover:text-white flex items-center gap-1 font-mono font-bold transition-colors"
           >
             <Copy className="w-3.5 h-3.5" /> Copy C Code
           </button>
         </div>
 
-        <pre className="bg-slate-900 text-cyan-300 p-4 rounded-2xl overflow-x-auto text-[11px] font-mono leading-relaxed border border-slate-800 max-h-72">
+        <pre className="bg-obsidian-950 text-cyan-300 p-4 rounded-2xl overflow-x-auto text-[11px] font-mono leading-relaxed border border-violet-500/30 max-h-72 shadow-inner">
           {wifiFirmwareCode}
         </pre>
       </div>

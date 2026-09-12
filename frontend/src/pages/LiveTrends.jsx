@@ -60,16 +60,16 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
   };
 
   return (
-    <div className="space-y-6 font-jakarta text-slate-900 select-none">
+    <div className="space-y-6 font-jakarta text-white select-none">
       
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/80 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-violet-500/20 pb-5">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 font-outfit uppercase flex items-center gap-2.5">
-            <ChartIcon className="w-7 h-7 text-emerald-600" />
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-outfit uppercase flex items-center gap-2.5 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+            <ChartIcon className="w-7 h-7 text-violet-400 drop-shadow-[0_0_10px_rgba(167,139,250,0.8)]" />
             <span>LIVE SENSOR TIME-SERIES TRENDS</span>
           </h1>
-          <p className="text-xs text-slate-500 font-sans mt-1">
+          <p className="text-xs text-violet-300/70 font-sans mt-1">
             Historical time-series analysis for thermal, atmospheric gas & respiratory parameters
           </p>
         </div>
@@ -77,7 +77,7 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportCSV}
-            className="px-4 py-2.5 rounded-xl bg-slate-900 text-white font-outfit font-bold text-xs flex items-center gap-2 shadow-md hover:bg-slate-800 transition-all"
+            className="px-4 py-2.5 rounded-xl bg-obsidian-800 border border-violet-500/30 text-white font-outfit font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:bg-obsidian-700 transition-all"
           >
             <Download className="w-4 h-4 text-[#D4FF00]" />
             <span>EXPORT TELEMETRY CSV</span>
@@ -86,10 +86,10 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
       </div>
 
       {/* PARAMETER SELECTOR & CHART CONTAINER */}
-      <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md space-y-6">
+      <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.15)] space-y-6">
         
         {/* Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-100 scrollbar-none font-mono text-xs">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-violet-500/20 scrollbar-none font-mono text-xs">
           {parameters.map((p) => {
             const isSelected = selectedParam === p.id;
             return (
@@ -98,8 +98,8 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
                 onClick={() => setSelectedParam(p.id)}
                 className={`px-4 py-2 rounded-xl font-bold whitespace-nowrap transition-all ${
                   isSelected
-                    ? 'bg-slate-900 text-white shadow-md'
-                    : 'bg-slate-100 border border-slate-200 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-violet-600 text-white shadow-[0_0_15px_rgba(139,92,246,0.3)] border border-violet-500'
+                    : 'bg-obsidian-900 border border-violet-500/20 text-violet-300 hover:bg-obsidian-700'
                 }`}
               >
                 {p.label}
@@ -111,15 +111,15 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
         {/* Toolbar: Time Range, Pause, Reset */}
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
           <div className="flex items-center gap-2">
-            <span className="text-slate-600 font-bold">TIME RANGE:</span>
+            <span className="text-violet-300/70 font-bold">TIME RANGE:</span>
             {['1m', '5m', '15m', '1h', '6h', '24h'].map((t) => (
               <button
                 key={t}
                 onClick={() => setTimeRange(t)}
                 className={`px-3 py-1.5 rounded-xl border font-bold transition-all ${
                   timeRange === t
-                    ? 'bg-emerald-500 text-white border-emerald-600 shadow-sm'
-                    : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-violet-600 text-white border-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.3)]'
+                    : 'bg-obsidian-900 border-violet-500/20 text-violet-300 hover:bg-obsidian-700'
                 }`}
               >
                 {t}
@@ -130,9 +130,9 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
           <div className="flex items-center gap-2">
             <button
               onClick={onTogglePause}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-700 font-bold flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-1.5 rounded-xl bg-obsidian-900 border border-violet-500/30 hover:bg-obsidian-800 text-violet-200 font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(139,92,246,0.1)]"
             >
-              {isPaused ? <Play className="w-3.5 h-3.5 text-emerald-600" /> : <Pause className="w-3.5 h-3.5 text-amber-600" />}
+              {isPaused ? <Play className="w-3.5 h-3.5 text-emerald-400" /> : <Pause className="w-3.5 h-3.5 text-amber-400" />}
               <span>{isPaused ? 'RESUME LIVE STREAM' : 'PAUSE UPDATES'}</span>
             </button>
           </div>
@@ -143,16 +143,16 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
           {filteredHistory.length > 0 ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={filteredHistory} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
-                <XAxis dataKey="time" stroke="#64748B" fontSize={10} tickLine={false} fontFamily="monospace" />
-                <YAxis stroke="#64748B" fontSize={10} tickLine={false} domain={['auto', 'auto']} fontFamily="monospace" unit={` ${currentParamObj.unit}`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#2e1065" vertical={false} />
+                <XAxis dataKey="time" stroke="#a78bfa" fontSize={10} tickLine={false} fontFamily="monospace" />
+                <YAxis stroke="#a78bfa" fontSize={10} tickLine={false} domain={['auto', 'auto']} fontFamily="monospace" unit={` ${currentParamObj.unit}`} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0F172A',
-                    borderColor: '#334155',
+                    backgroundColor: '#0c0a1a', // obsidian-900
+                    borderColor: 'rgba(139, 92, 246, 0.2)', // violet-500/20
                     borderRadius: '12px',
                     fontSize: '11px',
-                    color: '#F8FAFC'
+                    color: '#ede9fe' // violet-100
                   }}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px', fontFamily: 'monospace' }} />
@@ -167,7 +167,7 @@ export function LiveTrendsPage({ history = [], isPaused = false, onTogglePause }
               </LineChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-full flex items-center justify-center text-xs font-mono text-slate-400">
+            <div className="h-full flex items-center justify-center text-xs font-mono text-violet-400/50">
               Waiting for live sensor data stream...
             </div>
           )}

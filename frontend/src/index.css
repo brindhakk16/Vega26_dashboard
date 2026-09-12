@@ -7,27 +7,27 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
-    @apply bg-[#F4F6F9] text-[#1E293B] font-sans antialiased selection:bg-emerald-500 selection:text-white;
+    @apply bg-[#080312] text-[#f1f0f7] font-sans antialiased selection:bg-violet-600 selection:text-white;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Violet Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #0d061c;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #34185e;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #6d28d9;
 }
 
 /* Micro Animations */

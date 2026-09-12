@@ -59,16 +59,16 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
 
       {/* Navigation Drawer Container */}
       <aside className={`
-        fixed lg:relative top-16 lg:top-auto bottom-0 lg:bottom-auto left-0 z-30 lg:z-auto h-[calc(100vh-4.5rem)] lg:h-full bg-white/95 border border-slate-200/80 p-3.5 flex flex-col justify-between text-slate-900 font-jakarta transition-all duration-300 select-none rounded-[32px] shadow-lg
+        fixed lg:relative top-16 lg:top-auto bottom-0 lg:bottom-auto left-0 z-30 lg:z-auto h-[calc(100vh-4.5rem)] lg:h-full bg-[#0c061a]/95 border border-violet-900/40 p-3.5 flex flex-col justify-between text-slate-100 font-jakarta transition-all duration-300 select-none rounded-[32px] shadow-xl backdrop-blur-xl
         ${isOpen ? 'translate-x-0 shadow-2xl w-72' : '-translate-x-full lg:translate-x-0'}
         ${isCollapsed ? 'lg:w-20' : 'lg:w-72'}
       `}>
         <div className="space-y-4">
           
           {/* Header Title & Collapse/Expand Toggle Button */}
-          <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 px-1">
+          <div className="flex items-center justify-between pb-3 border-b border-violet-900/50 px-1">
             {!isCollapsed && (
-              <span className="font-outfit text-xs text-slate-400 font-bold uppercase tracking-widest truncate">
+              <span className="font-outfit text-xs text-violet-400/80 font-bold uppercase tracking-widest truncate">
                 WORKSPACE NAV
               </span>
             )}
@@ -77,9 +77,9 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
               title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-              className="hidden lg:flex p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 transition-all ml-auto"
+              className="hidden lg:flex p-1.5 rounded-xl bg-violet-950/70 hover:bg-violet-900/70 border border-violet-800/60 text-violet-300 hover:text-white transition-all ml-auto"
             >
-              {isCollapsed ? <PanelLeftOpen className="w-4 h-4 text-slate-900" /> : <PanelLeftClose className="w-4 h-4" />}
+              {isCollapsed ? <PanelLeftOpen className="w-4 h-4 text-violet-200" /> : <PanelLeftClose className="w-4 h-4" />}
             </button>
           </div>
 
@@ -94,21 +94,21 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
                     onClick={() => handleSelect(item.id)}
                     className={`w-full flex items-center ${isCollapsed ? 'justify-center px-2' : 'justify-between px-3.5'} py-2.5 rounded-2xl font-outfit text-xs font-medium transition-all ${
                       isActive
-                        ? 'bg-slate-900 text-white font-bold shadow-md'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                        ? 'bg-gradient-to-r from-violet-600 to-purple-700 text-white font-bold shadow-[0_0_20px_rgba(147,51,234,0.4)] border border-violet-400/40'
+                        : 'text-violet-300/70 hover:text-white hover:bg-violet-950/60'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-[#D4FF00]' : 'text-slate-500'}`} />
+                      <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-white' : 'text-violet-400/70 group-hover:text-violet-300'}`} />
                       {!isCollapsed && <span className="truncate">{item.label}</span>}
                     </div>
 
                     {isActive && (
-                      <span className="w-2 h-2 rounded-full bg-[#D4FF00] shadow-[0_0_8px_#D4FF00]" />
+                      <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
                     )}
 
                     {!isCollapsed && !isActive && item.badge && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-rose-500 text-white">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-rose-500 text-white shadow-sm">
                         {item.badge}
                       </span>
                     )}
@@ -117,7 +117,7 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
                   {/* Pop-Out Tooltip when Sidebar is Collapsed */}
                   {isCollapsed && (
                     <div className="absolute left-full top-1/2 -translate-y-1/2 ml-3 hidden group-hover:flex items-center z-50 pointer-events-none">
-                      <div className="bg-slate-900 text-white text-xs font-outfit font-bold px-3 py-1.5 rounded-xl shadow-2xl whitespace-nowrap flex items-center gap-2">
+                      <div className="bg-[#120726] border border-violet-700/50 text-white text-xs font-outfit font-bold px-3 py-1.5 rounded-xl shadow-2xl whitespace-nowrap flex items-center gap-2">
                         <span>{item.label}</span>
                         {item.badge && (
                           <span className="px-1.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-mono">
@@ -134,15 +134,15 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
         </div>
 
         {/* Footer Hardware Info Badge */}
-        <div className={`p-3 bg-slate-50 border border-slate-200/80 rounded-2xl text-xs font-mono text-slate-600 transition-all ${isCollapsed ? 'text-center' : 'space-y-1'}`}>
-          <div className="text-slate-900 font-bold flex items-center justify-between">
-            {!isCollapsed ? <span>VEGA ARIES HUB</span> : <span className="text-[10px] text-emerald-600">IOT</span>}
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mx-auto lg:mx-0" />
+        <div className={`p-3 bg-[#13072b] border border-violet-900/60 rounded-2xl text-xs font-mono text-violet-300 transition-all ${isCollapsed ? 'text-center' : 'space-y-1'}`}>
+          <div className="text-white font-bold flex items-center justify-between">
+            {!isCollapsed ? <span className="text-violet-200">VEGA ARIES HUB</span> : <span className="text-[10px] text-violet-400">IOT</span>}
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mx-auto lg:mx-0 shadow-[0_0_8px_#34d399]" />
           </div>
           {!isCollapsed && (
             <>
-              <div className="text-[11px] text-slate-500">RISC-V USB UART</div>
-              <div className="text-[10px] text-emerald-600 pt-1 border-t border-slate-200 font-semibold">
+              <div className="text-[11px] text-violet-400/70">RISC-V USB UART</div>
+              <div className="text-[10px] text-emerald-400 pt-1 border-t border-violet-900/50 font-semibold">
                 Status: Live Telemetry
               </div>
             </>

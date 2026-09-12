@@ -50,7 +50,7 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#EAECEF] text-slate-900 selection:bg-emerald-500 selection:text-white font-jakarta">
+    <div className="min-h-screen flex flex-col bg-[#080312] text-slate-100 selection:bg-violet-600 selection:text-white font-jakarta">
       
       {/* Header Toolbar */}
       <HeaderNav
@@ -78,7 +78,7 @@ export function App() {
         />
 
         {/* Dynamic Workspace Container */}
-        <main className="flex-1 overflow-y-auto bg-[#F8FAFC] border border-slate-200/80 rounded-[32px] shadow-xl p-4 md:p-8">
+        <main className="flex-1 overflow-y-auto bg-[#0d061c]/90 border border-violet-900/40 rounded-[32px] shadow-2xl p-4 md:p-8 backdrop-blur-xl">
           
           {activeTab === 'dashboard' && (
             <DashboardOverviewPage

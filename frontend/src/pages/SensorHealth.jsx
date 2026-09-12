@@ -58,33 +58,33 @@ export function SensorHealthPage({ data = {} }) {
   ];
 
   return (
-    <div className="p-4 md:p-8 space-y-6 font-jakarta text-slate-900">
+    <div className="p-4 md:p-8 space-y-6 font-jakarta text-white">
       
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-violet-500/20 pb-5">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 font-outfit uppercase flex items-center gap-2.5">
-            <Cpu className="w-6 h-6 text-emerald-600" />
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-outfit uppercase flex items-center gap-2.5 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+            <Cpu className="w-6 h-6 text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
             <span>SENSOR HEALTH & VEGA ARIES v2.0 DIAGNOSTICS</span>
           </h1>
-          <p className="text-xs text-slate-600 font-sans mt-1">
+          <p className="text-xs text-violet-300/70 font-sans mt-1">
             Real-time module status, telemetry reception rate, USB serial link & hardware diagnostics
           </p>
         </div>
       </div>
 
       {/* VEGA ARIES v2.0 MICROCONTROLLER STATUS BANNER */}
-      <div className="bg-slate-900 text-white rounded-3xl p-6 shadow-xl space-y-4 border border-slate-800">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <div className="bg-obsidian-800/80 backdrop-blur-md text-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.15)] space-y-4 border border-violet-500/20">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-violet-500/20 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
-              <Usb className="w-6 h-6 text-[#D4FF00]" />
+            <div className="p-2.5 rounded-2xl bg-emerald-900/30 border border-emerald-500/30">
+              <Usb className="w-6 h-6 text-emerald-400" />
             </div>
             <div>
-              <h3 className="font-outfit font-extrabold text-base text-white">
+              <h3 className="font-outfit font-extrabold text-base text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">
                 C-DAC VEGA ARIES v2.0 Microcontroller (RISC-V)
               </h3>
-              <p className="text-xs text-slate-400 font-mono">
+              <p className="text-xs text-violet-300/70 font-mono">
                 Hardware Link Protocol: USB UART @ {baudRate} Baud
               </p>
             </div>
@@ -101,21 +101,21 @@ export function SensorHealthPage({ data = {} }) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs">
-          <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
-            <div className="text-slate-400">Connection Bus:</div>
+          <div className="bg-obsidian-950 p-3.5 rounded-2xl border border-violet-500/20 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+            <div className="text-violet-400/60">Connection Bus:</div>
             <div className="text-white font-bold mt-1">USB UART Serial</div>
           </div>
-          <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
-            <div className="text-slate-400">Baud Rate:</div>
-            <div className="text-[#D4FF00] font-bold mt-1">{baudRate} bps</div>
+          <div className="bg-obsidian-950 p-3.5 rounded-2xl border border-violet-500/20 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+            <div className="text-violet-400/60">Baud Rate:</div>
+            <div className="text-[#D4FF00] font-bold mt-1 drop-shadow-[0_0_5px_rgba(212,255,0,0.5)]">{baudRate} bps</div>
           </div>
-          <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
-            <div className="text-slate-400">Packets Ingested:</div>
-            <div className="text-cyan-400 font-bold mt-1">{packetsReceived} pkts ({bytesReceived} B)</div>
+          <div className="bg-obsidian-950 p-3.5 rounded-2xl border border-violet-500/20 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+            <div className="text-violet-400/60">Packets Ingested:</div>
+            <div className="text-cyan-400 font-bold mt-1 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">{packetsReceived} pkts ({bytesReceived} B)</div>
           </div>
-          <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
-            <div className="text-slate-400">Board Architecture:</div>
-            <div className="text-emerald-400 font-bold mt-1">THEIA 32-bit RISC-V</div>
+          <div className="bg-obsidian-950 p-3.5 rounded-2xl border border-violet-500/20 shadow-[0_0_10px_rgba(139,92,246,0.1)]">
+            <div className="text-violet-400/60">Board Architecture:</div>
+            <div className="text-emerald-400 font-bold mt-1 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">THEIA 32-bit RISC-V</div>
           </div>
         </div>
       </div>
@@ -127,27 +127,27 @@ export function SensorHealthPage({ data = {} }) {
           return (
             <div 
               key={mod.id}
-              className="bg-white border border-slate-200 rounded-3xl p-6 shadow-md space-y-5"
+              className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] space-y-5"
             >
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <div className="flex items-center justify-between border-b border-violet-500/20 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <Cpu className="w-5 h-5 text-emerald-600" />
-                  <span className="font-outfit font-extrabold text-base text-slate-900">{mod.title}</span>
+                  <Cpu className="w-5 h-5 text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="font-outfit font-extrabold text-base text-white">{mod.title}</span>
                 </div>
 
                 <span className={`px-3 py-1 rounded-full font-mono text-xs font-bold flex items-center gap-1.5 border ${
-                  isOnline ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300'
+                  isOnline ? 'bg-emerald-900/30 text-emerald-400 border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.1)]' : 'bg-rose-900/30 text-rose-400 border-rose-500/30 shadow-[0_0_10px_rgba(244,63,94,0.1)]'
                 }`}>
-                  <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
+                  <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-400 animate-pulse shadow-[0_0_5px_rgba(52,211,153,0.8)]' : 'bg-rose-500 shadow-[0_0_5px_rgba(244,63,94,0.8)]'}`} />
                   ● {isOnline ? 'ONLINE' : 'OFFLINE'}
                 </span>
               </div>
 
               <div className="space-y-3 font-mono text-xs">
                 {mod.data.map((d, i) => (
-                  <div key={i} className="flex justify-between items-center bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                    <span className="text-slate-600">{d.label}:</span>
-                    <span className="text-slate-900 font-bold">{d.val}</span>
+                  <div key={i} className="flex justify-between items-center bg-obsidian-900 p-3 rounded-2xl border border-violet-500/20 shadow-[0_0_10px_rgba(139,92,246,0.05)]">
+                    <span className="text-violet-300/70">{d.label}:</span>
+                    <span className="text-white font-bold">{d.val}</span>
                   </div>
                 ))}
               </div>

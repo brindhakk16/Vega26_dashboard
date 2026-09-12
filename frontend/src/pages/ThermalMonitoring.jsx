@@ -59,16 +59,16 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
   }));
 
   return (
-    <div className="space-y-6 font-jakarta text-slate-900 select-none">
+    <div className="space-y-6 font-jakarta text-white select-none">
       
       {/* Title Header Toolbar */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200/80 pb-5">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-violet-500/20 pb-5">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 font-outfit uppercase flex items-center gap-2.5">
-            <Flame className="w-7 h-7 text-rose-500 animate-pulse" />
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-outfit uppercase flex items-center gap-2.5 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+            <Flame className="w-7 h-7 text-violet-400 animate-pulse drop-shadow-[0_0_10px_rgba(167,139,250,0.8)]" />
             <span>THERMAL IMAGER DISPLAY & TELEMETRY</span>
           </h1>
-          <p className="text-xs text-slate-500 font-sans mt-1">
+          <p className="text-xs text-violet-300/70 font-sans mt-1">
             Hardware TFT LCD Thermal Camera Simulation & 8×8 Infrared Telemetry
           </p>
         </div>
@@ -79,8 +79,8 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
             onClick={() => setViewMode('lcd')}
             className={`px-4 py-2 rounded-full font-bold flex items-center gap-2 transition-all ${
               viewMode === 'lcd'
-                ? 'bg-slate-900 text-white shadow-md'
-                : 'bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200'
+                ? 'bg-violet-600 text-white shadow-[0_0_15px_rgba(139,92,246,0.3)]'
+                : 'bg-obsidian-800 border border-violet-500/30 text-violet-300 hover:bg-obsidian-700'
             }`}
           >
             <Tv className="w-4 h-4" />
@@ -91,8 +91,8 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
             onClick={() => setViewMode('workstation')}
             className={`px-4 py-2 rounded-full font-bold flex items-center gap-2 transition-all ${
               viewMode === 'workstation'
-                ? 'bg-slate-900 text-white shadow-md'
-                : 'bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200'
+                ? 'bg-violet-600 text-white shadow-[0_0_15px_rgba(139,92,246,0.3)]'
+                : 'bg-obsidian-800 border border-violet-500/30 text-violet-300 hover:bg-obsidian-700'
             }`}
           >
             <LayoutGrid className="w-4 h-4" />
@@ -101,7 +101,7 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
 
           <button
             onClick={() => setUnit(unit === 'C' ? 'F' : 'C')}
-            className="px-3.5 py-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 font-bold transition-all"
+            className="px-3.5 py-2 rounded-full bg-obsidian-800 hover:bg-obsidian-700 border border-violet-500/30 text-violet-300 font-bold transition-all"
           >
             °{unit}
           </button>
@@ -254,35 +254,35 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
             
             {/* Quick Metrics Cards */}
             <div className="grid grid-cols-2 gap-4 font-mono">
-              <div className="bg-white border border-slate-200/80 p-4 rounded-3xl space-y-1 shadow-md">
-                <div className="text-xs text-rose-600 font-bold uppercase">MAX TEMP</div>
-                <div className="text-3xl font-extrabold font-outfit text-slate-900">
+              <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 p-4 rounded-3xl space-y-1 shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+                <div className="text-xs text-rose-400 font-bold uppercase">MAX TEMP</div>
+                <div className="text-3xl font-extrabold font-outfit text-white">
                   {formatTemp(maxTemp, unit)}
                 </div>
-                <div className="text-[10px] text-slate-500">Hotspot Coordinates</div>
+                <div className="text-[10px] text-violet-300/70">Hotspot Coordinates</div>
               </div>
 
-              <div className="bg-white border border-slate-200/80 p-4 rounded-3xl space-y-1 shadow-md">
-                <div className="text-xs text-cyan-600 font-bold uppercase">MIN TEMP</div>
-                <div className="text-3xl font-extrabold font-outfit text-slate-900">
+              <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 p-4 rounded-3xl space-y-1 shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+                <div className="text-xs text-cyan-400 font-bold uppercase">MIN TEMP</div>
+                <div className="text-3xl font-extrabold font-outfit text-white">
                   {formatTemp(minTemp, unit)}
                 </div>
-                <div className="text-[10px] text-slate-500">Coolest Region</div>
+                <div className="text-[10px] text-violet-300/70">Coolest Region</div>
               </div>
             </div>
 
             {/* Emissivity & Imager Settings Panel */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md space-y-4 font-mono text-xs">
-              <h3 className="font-outfit text-sm font-bold text-slate-900 uppercase flex items-center gap-2 border-b border-slate-100 pb-3">
-                <Settings2 className="w-4 h-4 text-emerald-600" />
+            <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] space-y-4 font-mono text-xs">
+              <h3 className="font-outfit text-sm font-bold text-white uppercase flex items-center gap-2 border-b border-violet-500/20 pb-3">
+                <Settings2 className="w-4 h-4 text-violet-400" />
                 <span>Thermal Imager OSD Parameters</span>
               </h3>
 
               <div className="space-y-4">
                 <div>
-                  <div className="flex justify-between mb-1.5 text-slate-700 font-bold">
+                  <div className="flex justify-between mb-1.5 text-violet-200 font-bold">
                     <span>Emissivity Coefficient (ε):</span>
-                    <span className="text-emerald-700 font-extrabold">{emissivity.toFixed(2)} (Human Skin / Matte)</span>
+                    <span className="text-violet-400 font-extrabold">{emissivity.toFixed(2)} (Human Skin / Matte)</span>
                   </div>
                   <input
                     type="range"
@@ -291,29 +291,29 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
                     step="0.01"
                     value={emissivity}
                     onChange={(e) => setEmissivity(Number(e.target.value))}
-                    className="w-full accent-emerald-600 cursor-pointer h-2 bg-slate-200 rounded-lg"
+                    className="w-full accent-violet-500 cursor-pointer h-2 bg-obsidian-900 rounded-lg"
                   />
-                  <span className="text-[10px] text-slate-500 block mt-1">Standard skin thermal emissivity: 0.95 - 0.98</span>
+                  <span className="text-[10px] text-violet-400/60 block mt-1">Standard skin thermal emissivity: 0.95 - 0.98</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pt-2">
-                  <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                    <div className="text-slate-500 text-[10px] font-bold">Hotspot Region</div>
-                    <div className="text-sm font-bold text-slate-900 font-outfit mt-0.5">Row {hotspotRow} / Col {hotspotCol}</div>
+                  <div className="bg-obsidian-900 p-3 rounded-2xl border border-violet-500/20">
+                    <div className="text-violet-400/70 text-[10px] font-bold">Hotspot Region</div>
+                    <div className="text-sm font-bold text-white font-outfit mt-0.5">Row {hotspotRow} / Col {hotspotCol}</div>
                   </div>
-                  <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                    <div className="text-slate-500 text-[10px] font-bold">Center Spot Temp</div>
-                    <div className="text-sm font-bold text-cyan-600 font-outfit mt-0.5">{formatTemp(centerTemp, unit)}</div>
+                  <div className="bg-obsidian-900 p-3 rounded-2xl border border-violet-500/20">
+                    <div className="text-violet-400/70 text-[10px] font-bold">Center Spot Temp</div>
+                    <div className="text-sm font-bold text-cyan-400 font-outfit mt-0.5">{formatTemp(centerTemp, unit)}</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Maximum Temperature vs Time Chart */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 font-mono text-xs">
-                <span className="font-outfit text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-rose-600" />
+            <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-violet-500/20 pb-3 font-mono text-xs">
+                <span className="font-outfit text-sm font-bold text-white flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-violet-400" />
                   <span>Maximum Temperature vs Time</span>
                 </span>
 
@@ -324,8 +324,8 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
                       onClick={() => setTimeWindow(t)}
                       className={`px-2 py-0.5 rounded-md border transition-all uppercase ${
                         timeWindow === t
-                          ? 'bg-slate-900 text-white font-bold border-slate-900'
-                          : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'
+                          ? 'bg-violet-600 text-white font-bold border-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.3)]'
+                          : 'bg-obsidian-900 border-violet-500/30 text-violet-300 hover:bg-obsidian-700'
                       }`}
                     >
                       {t}
@@ -342,15 +342,15 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
                     <YAxis stroke="#64748B" fontSize={10} tickLine={false} domain={['auto', 'auto']} fontFamily="monospace" unit={`°${unit}`} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#0F172A',
-                        borderColor: '#334155',
+                        backgroundColor: '#0c0a1a', // obsidian-900
+                        borderColor: 'rgba(139, 92, 246, 0.2)', // violet-500/20
                         borderRadius: '12px',
                         fontSize: '11px',
-                        color: '#F8FAFC'
+                        color: '#ede9fe' // violet-100
                       }}
                     />
-                    <Line type="monotone" dataKey="dispMax" name={`Max Temp (°${unit})`} stroke="#f43f5e" strokeWidth={2.5} dot={false} />
-                    <Line type="monotone" dataKey="dispAvg" name={`Avg Temp (°${unit})`} stroke="#10b981" strokeWidth={1.5} dot={false} />
+                    <Line type="monotone" dataKey="dispMax" name={`Max Temp (°${unit})`} stroke="#c084fc" strokeWidth={2.5} dot={false} />
+                    <Line type="monotone" dataKey="dispAvg" name={`Avg Temp (°${unit})`} stroke="#8b5cf6" strokeWidth={1.5} dot={false} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -365,23 +365,23 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
       {viewMode === 'workstation' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-6 shadow-md space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <span className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                <Activity className="w-4 h-4 text-emerald-600" />
+          <div className="lg:col-span-7 bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] space-y-5">
+            <div className="flex items-center justify-between border-b border-violet-500/20 pb-3">
+              <span className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <Activity className="w-4 h-4 text-violet-400" />
                 <span>64-Cell Thermopile Matrix Display</span>
               </span>
-              <span className="text-[11px] font-mono text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300 font-bold">
+              <span className="text-[11px] font-mono text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-full border border-emerald-400/30 font-bold">
                 ● Live Stream Active
               </span>
             </div>
 
-            <div className="relative p-5 bg-slate-950 rounded-2xl border border-slate-800 shadow-xl">
-              <div className="flex justify-between items-center text-xs font-mono mb-4 bg-slate-900 px-4 py-2 rounded-xl border border-slate-800 text-white">
-                <span className="text-slate-400">
+            <div className="relative p-5 bg-obsidian-950 rounded-2xl border border-violet-500/20 shadow-xl">
+              <div className="flex justify-between items-center text-xs font-mono mb-4 bg-obsidian-800 px-4 py-2 rounded-xl border border-violet-500/30 text-white">
+                <span className="text-violet-300">
                   {hoveredCell ? `Inspecting Cell: Row ${hoveredCell.row} / Col ${hoveredCell.col}` : 'Hover over any cell to inspect temperature'}
                 </span>
-                <span className="text-[#D4FF00] font-bold text-sm">
+                <span className="text-[#D4FF00] font-bold text-sm drop-shadow-[0_0_5px_rgba(212,255,0,0.5)]">
                   {hoveredCell 
                     ? formatTemp(hoveredCell.val, unit)
                     : `Hotspot: Row ${hotspotRow} / Col ${hotspotCol} (${formatTemp(maxTemp, unit)})`
@@ -424,20 +424,20 @@ export function ThermalMonitoringPage({ data = {}, history = [], thresholds = {}
 
           <div className="lg:col-span-5 space-y-6">
             <div className="grid grid-cols-2 gap-4 font-mono">
-              <div className="bg-white border border-slate-200/80 p-4 rounded-3xl space-y-1 shadow-md">
-                <div className="text-xs text-rose-600 font-bold uppercase">MAX TEMP</div>
-                <div className="text-3xl font-extrabold font-outfit text-slate-900">
+              <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 p-4 rounded-3xl space-y-1 shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+                <div className="text-xs text-rose-400 font-bold uppercase">MAX TEMP</div>
+                <div className="text-3xl font-extrabold font-outfit text-white">
                   {formatTemp(maxTemp, unit)}
                 </div>
-                <div className="text-[10px] text-slate-500">Hotspot Peak</div>
+                <div className="text-[10px] text-violet-300/70">Hotspot Peak</div>
               </div>
 
-              <div className="bg-white border border-slate-200/80 p-4 rounded-3xl space-y-1 shadow-md">
-                <div className="text-xs text-slate-500 font-bold uppercase">AVERAGE TEMP</div>
-                <div className="text-3xl font-extrabold font-outfit text-slate-900">
+              <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 p-4 rounded-3xl space-y-1 shadow-[0_4px_20px_rgba(139,92,246,0.1)]">
+                <div className="text-xs text-violet-400 font-bold uppercase">AVERAGE TEMP</div>
+                <div className="text-3xl font-extrabold font-outfit text-white">
                   {formatTemp(avgTemp, unit)}
                 </div>
-                <div className="text-[10px] text-slate-500">64 Cell Mean</div>
+                <div className="text-[10px] text-violet-300/70">64 Cell Mean</div>
               </div>
             </div>
           </div>

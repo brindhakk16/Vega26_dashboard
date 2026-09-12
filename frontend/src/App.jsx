@@ -4,6 +4,7 @@ import { HeaderNav } from './components/layout/HeaderNav.jsx';
 import { SidebarNav } from './components/layout/SidebarNav.jsx';
 
 import { DashboardOverviewPage } from './pages/DashboardOverview.jsx';
+import { PatientDashboardOverviewPage } from './pages/PatientDashboardOverview.jsx';
 import { ThermalMonitoringPage } from './pages/ThermalMonitoring.jsx';
 import { HumanMonitoringPage } from './pages/HumanMonitoring.jsx';
 import { GasMonitoringPage } from './pages/GasMonitoring.jsx';
@@ -63,6 +64,17 @@ export function App() {
     handleLogin(null);
   };
 
+  const handleToggleRole = () => {
+    const newRole = currentUser?.role === 'doctor' ? 'patient' : 'doctor';
+    const updatedUser = {
+      ...currentUser,
+      role: newRole,
+      name: newRole === 'doctor' ? 'Dr. Sarah Jenkins' : 'Alex Johnson (Parent)',
+      email: newRole === 'doctor' ? 'dr.jenkins@hospital.org' : 'parent@cradlesense.io'
+    };
+    handleLogin(updatedUser);
+  };
+
   const [activeTab, setActiveTab] = useState('dashboard');
   const [warningThreshold, setWarningThreshold] = useState(30);
   const [criticalThreshold, setCriticalThreshold] = useState(35);
@@ -112,6 +124,7 @@ export function App() {
         onOpenAlerts={() => setActiveTab('alerts')}
         user={currentUser}
         onLogout={handleLogout}
+        onToggleRole={handleToggleRole}
       />
 
       {/* Main Body Layout with Responsive Navigation Sidebar */}
@@ -122,17 +135,26 @@ export function App() {
           activeTab={activeTab}
           onTabChange={setActiveTab}
           activeAlertCount={activeAlerts.length}
+          userRole={currentUser?.role || 'doctor'}
         />
 
         {/* Dynamic Workspace Container */}
         <main className="flex-1 overflow-y-auto bg-[#0d061c]/90 border border-violet-900/40 rounded-[32px] shadow-2xl p-4 md:p-8 backdrop-blur-xl">
           
           {activeTab === 'dashboard' && (
-            <DashboardOverviewPage
-              data={data}
-              thresholds={thresholds}
-              onNavigate={setActiveTab}
-            />
+            currentUser?.role === 'patient' ? (
+              <PatientDashboardOverviewPage
+                data={data}
+                thresholds={thresholds}
+                onNavigate={setActiveTab}
+              />
+            ) : (
+              <DashboardOverviewPage
+                data={data}
+                thresholds={thresholds}
+                onNavigate={setActiveTab}
+              />
+            )
           )}
 
           {activeTab === 'thermal' && (

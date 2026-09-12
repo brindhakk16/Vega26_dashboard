@@ -31,19 +31,33 @@ export function DashboardOverviewPage({ data = {}, thresholds = {}, onNavigate }
       {/* Page Title Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-violet-900/40 pb-5">
         <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-violet-600/30 text-violet-300 font-bold border border-violet-500/40 tracking-wider">
+              CLINICAL PHYSICIAN WORKSTATION
+            </span>
+            <span className="text-xs text-violet-300/80 font-mono">
+              Patient: <strong>PAT-9842</strong> (Baby Alex • Ward 4 Bed 2)
+            </span>
+          </div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white font-outfit">
-            Smart Environment & Vitals
+            Smart Environment & Clinical Vitals
           </h1>
           <p className="text-xs text-violet-300/70 font-sans mt-1">
-            Real-time thermal array telemetry, vital respiration, air quality & safety diagnostics
+            Full diagnostic telemetry: 8x8 IR matrix, micro-displacement thoracic radar & multi-gas toxic analysis
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-violet-300 font-bold bg-violet-950/80 px-3.5 py-1.5 rounded-full border border-violet-700/60 shadow-sm flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-violet-400 animate-ping" />
-            4/4 SENSORS ACTIVE
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-mono text-violet-300 font-bold bg-violet-950/80 px-3 py-1.5 rounded-xl border border-violet-700/60 shadow-sm flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span>4/4 TELEMETRY CHANNELS ACTIVE</span>
           </span>
+          <button
+            onClick={() => onNavigate && onNavigate('alerts')}
+            className="text-xs font-mono text-cyan-300 font-bold bg-cyan-950/60 hover:bg-cyan-900/80 px-3 py-1.5 rounded-xl border border-cyan-700/60 transition-all flex items-center gap-1.5"
+          >
+            <span>CLINICAL ALARM LIMITS</span>
+          </button>
         </div>
       </div>
 

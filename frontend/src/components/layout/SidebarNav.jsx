@@ -19,23 +19,34 @@ import {
   PanelLeftOpen
 } from 'lucide-react';
 
-export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCount = 0 }) {
+export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCount = 0, userRole = 'doctor' }) {
   const [isOpen, setIsOpen] = useState(false); // Mobile drawer open
   const [isCollapsed, setIsCollapsed] = useState(false); // Desktop collapse toggle
 
-  const navItems = [
-    { id: 'dashboard', label: 'Dashboard Overview', shortLabel: 'Overview', icon: LayoutDashboard },
-    { id: 'thermal', label: 'Thermal Monitoring', shortLabel: 'Thermal', icon: Flame },
-    { id: 'human', label: 'Human Vital Monitoring', shortLabel: 'Human', icon: UserCheck },
-    { id: 'gas', label: 'Gas Monitoring', shortLabel: 'Gases', icon: Wind },
+  const doctorNavItems = [
+    { id: 'dashboard', label: 'Clinical Overview', shortLabel: 'Clinical', icon: LayoutDashboard },
+    { id: 'thermal', label: 'Thermal IR Matrix', shortLabel: 'Thermal', icon: Flame },
+    { id: 'human', label: 'Human Vital Monitoring', shortLabel: 'Vitals', icon: UserCheck },
+    { id: 'gas', label: 'Gas Monitoring (PPM)', shortLabel: 'Gases', icon: Wind },
     { id: 'airquality', label: 'Air Quality Overview', shortLabel: 'Air Quality', icon: Gauge },
-    { id: 'trends', label: 'Live Sensor Trends', shortLabel: 'Trends', icon: LineChart },
-    { id: 'alerts', label: 'Alerts & Events', shortLabel: 'Alerts', icon: Bell, badge: activeAlertCount > 0 ? activeAlertCount : null },
-    { id: 'health', label: 'Sensor Health', shortLabel: 'Health', icon: Cpu },
+    { id: 'trends', label: 'Live Analytical Trends', shortLabel: 'Trends', icon: LineChart },
+    { id: 'alerts', label: 'Alerts & Alarm Events', shortLabel: 'Alerts', icon: Bell, badge: activeAlertCount > 0 ? activeAlertCount : null },
+    { id: 'health', label: 'Sensor Health & Hardware', shortLabel: 'Hardware', icon: Cpu },
     { id: 'calibration', label: 'Sensor Calibration', shortLabel: 'Calibration', icon: SlidersHorizontal },
-    { id: 'historical', label: 'Historical Data & Timelog', shortLabel: 'Timelog', icon: History },
+    { id: 'historical', label: 'Clinical Data & Timelog', shortLabel: 'Timelog', icon: History },
     { id: 'settings', label: 'Workstation Settings & USB', shortLabel: 'Settings', icon: Settings },
   ];
+
+  const patientNavItems = [
+    { id: 'dashboard', label: 'Nursery & Wellness', shortLabel: 'Wellness', icon: LayoutDashboard },
+    { id: 'human', label: 'Baby Breathing & Vitals', shortLabel: 'Breathing', icon: UserCheck },
+    { id: 'thermal', label: 'Crib Comfort & Warmth', shortLabel: 'Comfort', icon: Flame },
+    { id: 'airquality', label: 'Nursery Air Cleanliness', shortLabel: 'Air Quality', icon: Gauge },
+    { id: 'alerts', label: 'Caregiver Notifications', shortLabel: 'Notices', icon: Bell, badge: activeAlertCount > 0 ? activeAlertCount : null },
+    { id: 'historical', label: 'Daily Sleep & Wellness Log', shortLabel: 'Sleep Log', icon: History },
+  ];
+
+  const navItems = userRole === 'patient' ? patientNavItems : doctorNavItems;
 
   const handleSelect = (id) => {
     onTabChange(id);
@@ -136,14 +147,24 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
         {/* Footer Hardware Info Badge */}
         <div className={`p-3 bg-[#13072b] border border-violet-900/60 rounded-2xl text-xs font-mono text-violet-300 transition-all ${isCollapsed ? 'text-center' : 'space-y-1'}`}>
           <div className="text-white font-bold flex items-center justify-between">
-            {!isCollapsed ? <span className="text-violet-200">VEGA ARIES HUB</span> : <span className="text-[10px] text-violet-400">IOT</span>}
+            {!isCollapsed ? (
+              <span className="text-violet-200">
+                {userRole === 'patient' ? 'NURSERY IOT SENSOR' : 'VEGA ARIES HUB'}
+              </span>
+            ) : (
+              <span className="text-[10px] text-violet-400">
+                {userRole === 'patient' ? 'CARE' : 'IOT'}
+              </span>
+            )}
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mx-auto lg:mx-0 shadow-[0_0_8px_#34d399]" />
           </div>
           {!isCollapsed && (
             <>
-              <div className="text-[11px] text-violet-400/70">RISC-V USB UART</div>
+              <div className="text-[11px] text-violet-400/70">
+                {userRole === 'patient' ? 'Baby Alex (PAT-9842)' : 'RISC-V USB UART'}
+              </div>
               <div className="text-[10px] text-emerald-400 pt-1 border-t border-violet-900/50 font-semibold">
-                Status: Live Telemetry
+                {userRole === 'patient' ? 'Status: Continuous Care' : 'Status: Live Telemetry'}
               </div>
             </>
           )}

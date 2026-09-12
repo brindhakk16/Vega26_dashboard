@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity, Bell, Play, Pause, Layers, Cpu, Usb, Zap, AlertTriangle, X } from 'lucide-react';
+import { Activity, Bell, Play, Pause, Layers, Cpu, Usb, Zap, AlertTriangle, X, Heart, Stethoscope } from 'lucide-react';
 import { useVegaAriesSerial } from '../../hooks/useVegaAriesSerial.js';
 
 export function HeaderNav({
@@ -13,7 +13,8 @@ export function HeaderNav({
   activeAlertCount = 0,
   onOpenAlerts,
   user = null,
-  onLogout
+  onLogout,
+  onToggleRole
 }) {
   const {
     isSupported,
@@ -145,11 +146,38 @@ export function HeaderNav({
             )}
           </button>
 
-          {/* User Profile & Sign Out Control */}
+          {/* User Profile & Role Switcher */}
           {user && (
             <div className="flex items-center gap-2 pl-2 border-l border-violet-900/50 shrink-0">
+              
+              {/* Quick 1-Click Role Toggle Switcher */}
+              {onToggleRole && (
+                <button
+                  onClick={onToggleRole}
+                  title={`Currently in ${user.role === 'doctor' ? 'Doctor Workstation' : 'Patient/Parent Portal'} mode. Click to toggle.`}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-outfit font-extrabold transition-all shadow-md active:scale-95 cursor-pointer ${
+                    user.role === 'doctor'
+                      ? 'bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800/80 hover:to-indigo-800/80 border-purple-500/50 text-purple-200 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
+                      : 'bg-gradient-to-r from-cyan-900/60 to-blue-900/60 hover:from-cyan-800/80 hover:to-blue-800/80 border-cyan-500/50 text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.3)]'
+                  }`}
+                >
+                  {user.role === 'doctor' ? (
+                    <>
+                      <Heart className="w-3.5 h-3.5 text-pink-400 fill-pink-400/20" />
+                      <span>Switch to Patient View</span>
+                    </>
+                  ) : (
+                    <>
+                      <Stethoscope className="w-3.5 h-3.5 text-violet-300" />
+                      <span>Switch to Doctor View</span>
+                    </>
+                  )}
+                </button>
+              )}
+
+              {/* User Identity Pill */}
               <div className="flex items-center gap-2 bg-violet-950/70 border border-violet-800/60 px-3 py-1 rounded-xl text-xs">
-                <span className={`w-2 h-2 rounded-full ${user.role === 'doctor' ? 'bg-violet-400 shadow-[0_0_8px_#c084fc]' : 'bg-cyan-400'}`} />
+                <span className={`w-2 h-2 rounded-full ${user.role === 'doctor' ? 'bg-violet-400 shadow-[0_0_8px_#c084fc]' : 'bg-cyan-400 shadow-[0_0_8px_#22d3ee]'}`} />
                 <span className="font-bold text-violet-100 font-outfit whitespace-nowrap">{user.name}</span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
                   user.role === 'doctor' ? 'bg-violet-500/20 text-violet-300 border border-violet-500/40' : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
@@ -161,7 +189,7 @@ export function HeaderNav({
               <button
                 onClick={onLogout}
                 title="Sign Out / Switch User"
-                className="px-3 py-1 rounded-xl bg-violet-800 hover:bg-violet-700 text-white font-bold text-xs transition-all shadow-[0_0_12px_rgba(147,51,234,0.3)] border border-violet-600/50 whitespace-nowrap"
+                className="px-3 py-1 rounded-xl bg-violet-800 hover:bg-violet-700 text-white font-bold text-xs transition-all shadow-[0_0_12px_rgba(147,51,234,0.3)] border border-violet-600/50 whitespace-nowrap cursor-pointer"
               >
                 <span>Sign Out</span>
               </button>

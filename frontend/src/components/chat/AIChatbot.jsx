@@ -29,22 +29,63 @@ export function AIChatbot({ data, thresholds, currentUser, onNavigate }) {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
+  const isPatient = currentUser?.role === 'patient';
+
   // Initial welcome message
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState(() => [
     {
       id: 'msg-welcome',
       sender: 'bot',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      text: `Greetings ${currentUser?.name ? currentUser.name : 'Operator'}! 🤖 I am your **VEGA RISC-V Neural Copilot**.\n\nI am continuously analyzing live data from your **AMG8833 Thermal Array**, **MR24D11C10 Vitals Radar**, and **MQ Gas Sensors**.`,
-      quickChips: [
-        '📊 Full System Vitals Briefing',
-        '🌡️ Thermal Hotspot Analysis',
-        '🫁 Respiration & Breathing Status',
-        '🍃 Air Quality & Gas Levels',
-        '⚠️ Active Alerts Diagnostic'
-      ]
+      text: isPatient
+        ? `Greetings ${currentUser?.name ? currentUser.name : 'Parent'}! 🤖 I am your **VEGA Nursery & Wellness Copilot**.\n\nI am continuously watching over **Baby Alex's** breathing rhythm, crib warmth, and nursery air cleanliness.`
+        : `Greetings ${currentUser?.name ? currentUser.name : 'Doctor'}! 🤖 I am your **VEGA RISC-V Clinical Copilot**.\n\nI am analyzing real-time clinical telemetry: **AMG8833 Thermal Array**, **MR24D11C10 Thoracic Radar**, and **MQ Gas Sensors**.`,
+      quickChips: isPatient
+        ? [
+            '🫁 Baby Breathing & Sleep Status',
+            '🌡️ Crib Comfort & Room Temp',
+            '🍃 Nursery Air Cleanliness',
+            '🩺 Attending Doctor Notes',
+            '📞 How to Contact Dr. Jenkins'
+          ]
+        : [
+            '📊 Full Clinical Vitals Briefing',
+            '🌡️ Thermal Hotspot Analysis',
+            '🫁 Respiration & Breathing Status',
+            '🍃 Air Quality & Gas Levels',
+            '⚠️ Active Alerts Diagnostic'
+          ]
     }
   ]);
+
+  // Reset greeting when user changes
+  useEffect(() => {
+    setMessages([
+      {
+        id: `msg-welcome-${Date.now()}`,
+        sender: 'bot',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        text: currentUser?.role === 'patient'
+          ? `Greetings ${currentUser?.name ? currentUser.name : 'Parent'}! 🤖 I am your **VEGA Nursery & Wellness Copilot**.\n\nI am continuously watching over **Baby Alex's** breathing rhythm, crib warmth, and nursery air cleanliness.`
+          : `Greetings ${currentUser?.name ? currentUser.name : 'Doctor'}! 🤖 I am your **VEGA RISC-V Clinical Copilot**.\n\nI am analyzing real-time clinical telemetry: **AMG8833 Thermal Array**, **MR24D11C10 Thoracic Radar**, and **MQ Gas Sensors**.`,
+        quickChips: currentUser?.role === 'patient'
+          ? [
+              '🫁 Baby Breathing & Sleep Status',
+              '🌡️ Crib Comfort & Room Temp',
+              '🍃 Nursery Air Cleanliness',
+              '🩺 Attending Doctor Notes',
+              '📞 How to Contact Dr. Jenkins'
+            ]
+          : [
+              '📊 Full Clinical Vitals Briefing',
+              '🌡️ Thermal Hotspot Analysis',
+              '🫁 Respiration & Breathing Status',
+              '🍃 Air Quality & Gas Levels',
+              '⚠️ Active Alerts Diagnostic'
+            ]
+      }
+    ]);
+  }, [currentUser?.role]);
 
   // Auto scroll to bottom
   const scrollToBottom = () => {
@@ -177,7 +218,18 @@ export function AIChatbot({ data, thresholds, currentUser, onNavigate }) {
       };
     }
 
-    // 7. Default Friendly Conversational Response
+    // 7. Doctor & Physician Consultation Queries
+    if (q.includes('doctor') || q.includes('physician') || q.includes('jenkins') || q.includes('contact') || q.includes('nurse') || q.includes('note')) {
+      return {
+        text: `### 🩺 Attending Care Team\n\n- **Lead Physician:** **Dr. Sarah Jenkins, MD** (Pediatrics)\n- **Assigned Station:** Pediatric Ward 4 Bed 2\n- **Patient:** Alex Johnson (\`PAT-9842\`)\n\n**Latest Clinical Care Note:**\n> *"Baby Alex has maintained stable vitals throughout the night. Continuous radar shows calm breathing. Continue normal room ventilation."*\n\nYou can click **Contact Doctor** on your dashboard to send a direct message or inquiry to Dr. Jenkins.`,
+        action: {
+          label: 'Open Care Notes on Dashboard',
+          tab: 'dashboard'
+        }
+      };
+    }
+
+    // 8. Default Friendly Conversational Response
     return {
       text: `I understand your query: *"I'm looking for ${query}"*.\n\nI can analyze your **AMG8833 Thermal Matrix**, **MR24D11C10 Radar Respiration**, **MQ Gas telemetry**, or guide you through sensor calibrations.\n\nTry asking:\n- *"What is the current patient breathing rate?"*\n- *"Is there any thermal hotspot detected?"*\n- *"Give me an air quality report"*`,
       quickChips: [

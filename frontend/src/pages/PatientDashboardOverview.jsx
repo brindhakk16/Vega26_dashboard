@@ -19,6 +19,7 @@ import {
   Send,
   Stethoscope
 } from 'lucide-react';
+import { HardwareLCDDisplay } from '../components/dashboard/HardwareLCDDisplay.jsx';
 
 export function PatientDashboardOverviewPage({ data = {}, thresholds = {}, onNavigate }) {
   const amg = data.amg8833 || {};
@@ -262,6 +263,9 @@ export function PatientDashboardOverviewPage({ data = {}, thresholds = {}, onNav
         </div>
 
       </div>
+      
+      {/* NURSERY PHYSICAL HARDWARE LCD SCREEN MIRROR & SENSOR TELEMETRY */}
+      <HardwareLCDDisplay data={data} thresholds={thresholds} />
 
       {/* DOCTOR CONSULTATION & CARE NOTES CARD */}
       <div className="bg-obsidian-800/80 backdrop-blur-md border border-violet-500/20 rounded-3xl p-6 shadow-[0_4px_20px_rgba(139,92,246,0.1)] space-y-4">

@@ -15,6 +15,7 @@ import { SensorHealthPage } from './pages/SensorHealth.jsx';
 import { SensorCalibrationPage } from './pages/SensorCalibration.jsx';
 import { HistoricalTimelogPage } from './pages/HistoricalTimelog.jsx';
 import { SettingsPage } from './pages/Settings.jsx';
+import { IntegrationGuidePage } from './pages/IntegrationGuide.jsx';
 import { LoginPage } from './pages/LoginPage.jsx';
 import { AIChatbot } from './components/chat/AIChatbot.jsx';
 
@@ -201,6 +202,13 @@ export function App() {
               onAcknowledge={acknowledgeAlert}
               onClear={clearAlert}
               onClearAll={clearAllAlerts}
+            />
+          )}
+
+          {activeTab === 'integration' && (
+            <IntegrationGuidePage
+              data={data}
+              thresholds={thresholds}
             />
           )}
 

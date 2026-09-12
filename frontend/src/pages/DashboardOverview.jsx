@@ -16,6 +16,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { calculateOverallAirQuality, getGasStatus } from '../utils/sensorDefaults.js';
+import { HardwareLCDDisplay } from '../components/dashboard/HardwareLCDDisplay.jsx';
 
 export function DashboardOverviewPage({ data = {}, thresholds = {}, onNavigate }) {
   const amg = data.amg8833 || {};
@@ -266,6 +267,9 @@ export function DashboardOverviewPage({ data = {}, thresholds = {}, onNavigate }
         </div>
 
       </div>
+
+      {/* REAL SENSOR HARDWARE LCD SIMULATION & LIVE MIRROR */}
+      <HardwareLCDDisplay data={data} thresholds={thresholds} />
 
     </div>
   );

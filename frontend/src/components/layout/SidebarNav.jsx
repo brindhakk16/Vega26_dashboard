@@ -16,7 +16,8 @@ import {
   ChevronLeft,
   ChevronRight,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
+  Tv
 } from 'lucide-react';
 
 export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCount = 0, userRole = 'doctor' }) {
@@ -31,6 +32,7 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
     { id: 'airquality', label: 'Air Quality Overview', shortLabel: 'Air Quality', icon: Gauge },
     { id: 'trends', label: 'Live Analytical Trends', shortLabel: 'Trends', icon: LineChart },
     { id: 'alerts', label: 'Alerts & Alarm Events', shortLabel: 'Alerts', icon: Bell, badge: activeAlertCount > 0 ? activeAlertCount : null },
+    { id: 'integration', label: 'Hardware LCD & Firmware', shortLabel: 'LCD & Code', icon: Tv },
     { id: 'health', label: 'Sensor Health & Hardware', shortLabel: 'Hardware', icon: Cpu },
     { id: 'calibration', label: 'Sensor Calibration', shortLabel: 'Calibration', icon: SlidersHorizontal },
     { id: 'historical', label: 'Clinical Data & Timelog', shortLabel: 'Timelog', icon: History },
@@ -42,6 +44,7 @@ export function SidebarNav({ activeTab = 'dashboard', onTabChange, activeAlertCo
     { id: 'human', label: 'Baby Breathing & Vitals', shortLabel: 'Breathing', icon: UserCheck },
     { id: 'thermal', label: 'Crib Comfort & Warmth', shortLabel: 'Comfort', icon: Flame },
     { id: 'airquality', label: 'Nursery Air Cleanliness', shortLabel: 'Air Quality', icon: Gauge },
+    { id: 'integration', label: 'Room LCD & Telemetry', shortLabel: 'Room LCD', icon: Tv },
     { id: 'alerts', label: 'Caregiver Notifications', shortLabel: 'Notices', icon: Bell, badge: activeAlertCount > 0 ? activeAlertCount : null },
     { id: 'historical', label: 'Daily Sleep & Wellness Log', shortLabel: 'Sleep Log', icon: History },
   ];

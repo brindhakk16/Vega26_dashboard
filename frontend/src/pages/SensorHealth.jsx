@@ -1,6 +1,7 @@
 import React from 'react';
-import { Cpu, CheckCircle2, XCircle, Activity, Radio, RefreshCw, Usb, Zap } from 'lucide-react';
+import { Cpu, CheckCircle2, XCircle, Activity, Radio, RefreshCw, Usb, Zap, Tv } from 'lucide-react';
 import { useVegaAriesSerial } from '../hooks/useVegaAriesSerial.js';
+import { HardwareLCDDisplay } from '../components/dashboard/HardwareLCDDisplay.jsx';
 
 export function SensorHealthPage({ data = {} }) {
   const { isConnected, baudRate, packetsReceived, bytesReceived, portInfo } = useVegaAriesSerial();
@@ -53,6 +54,17 @@ export function SensorHealthPage({ data = {} }) {
         { label: 'Respiration Telemetry', val: `Receiving (${mr24.breathing_rate || 18} BPM)` },
         { label: 'Signal Quality', val: `${(mr24.signal_quality || 'good').toUpperCase()}` },
         { label: 'Baud Rate', val: 'UART 115200 bps' }
+      ]
+    },
+    {
+      id: 'LCD',
+      title: 'I2C Character LCD (16x2 / 20x4)',
+      status: 'online',
+      data: [
+        { label: 'Bus & Address', val: 'I2C (0x27 / PCF8574 Backpack)' },
+        { label: 'Display Refresh', val: 'Dual-Output (Physical LCD + Web Mirror)' },
+        { label: 'Telemetry Stream', val: 'Real AMG8833, MQ135 & MR24D11C10 Sync' },
+        { label: 'Display Mode', val: '4-Screen Cycling (Vitals, Gases, IR, System)' }
       ]
     }
   ];
@@ -155,6 +167,9 @@ export function SensorHealthPage({ data = {} }) {
           );
         })}
       </div>
+
+      {/* DUAL-OUTPUT PHYSICAL & MIRRORED I2C LCD DISPLAY */}
+      <HardwareLCDDisplay data={data} />
 
     </div>
   );
